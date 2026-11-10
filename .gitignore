@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*.json
+*secret*.json
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Raw, intermediate, and generated data
+data/raw/**
+data/normalized/**
+data/cleaned/**
+data/processed/**
+results/**
+experiments/datasets/**
+*.parquet
+*.jsonl
+*.db
+*.sqlite
+*.sqlite3
+
+# Large archives and local competition materials
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+competition_materials/
+official_materials/
+
+# Keep directory placeholders
+!data/raw/.gitkeep
+!data/normalized/.gitkeep
+!data/cleaned/.gitkeep
+!data/processed/.gitkeep
+!results/.gitkeep
+
