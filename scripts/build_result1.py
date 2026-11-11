@@ -5,7 +5,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-# 引入所有采集器
+# 原有的 8 个采集器
 from collectors.github_collector import GitHubCollector
 from collectors.bilibili_collector import BilibiliCollector
 from collectors.v2ex_collector import V2EXCollector
@@ -15,11 +15,16 @@ from collectors.huggingface_collector import HuggingFaceCollector
 from collectors.stackexchange_collector import StackExchangeCollector
 from collectors.google_news_collector import GoogleNewsCollector
 
+# 新增的 2 个采集器（教育论坛 & 采购评价）
+from collectors.edu_forum_collector import EduForumCollector
+from collectors.procurement_collector import ProcurementCollector
+
 from collectors.base import dump_jsonl
 from processing.clean import clean_record, is_recent
 from processing.dedup import dedup_exact
 from processing.export_result1 import export
 
+# 注册所有的 10 个采集器
 COLLECTORS = {
     "github": GitHubCollector(),
     "bilibili": BilibiliCollector(),
@@ -29,15 +34,17 @@ COLLECTORS = {
     "huggingface": HuggingFaceCollector(),
     "stackexchange": StackExchangeCollector(),
     "googlenews": GoogleNewsCollector(),
+    "eduforum": EduForumCollector(),      # 新增
+    "procurement": ProcurementCollector() # 新增
 }
 
-# 1. 强关联教育词汇（必须命中至少一个）
+# 强关联教育词汇（必须命中至少一个）
 EDU_KEYWORDS = [
     "教育", "教学", "学生", "老师", "教师", "课程", "考试", "辅导", "作业", "学校", "科研", "论文", "实验", 
     "education", "learning", "student", "teacher", "tutor", "academic"
 ]
 
-# 2. 噪音黑名单（命中任何一个直接干掉）
+# 噪音黑名单（命中任何一个直接干掉）
 BLACKLIST = [
     "抽奖", "直播间", "买了个", "小米", "报名啦", "训练营", "买课", "下单", "价格", 
     "招聘", "求职", "内推", "红包", "优惠券", "抽奖", "福利"
@@ -59,22 +66,23 @@ def main():
     raw_path = f"data/raw/{args.batch}/records.jsonl"
     query_list = [q.strip() for q in args.queries.split(",") if q.strip()]
 
-    # 采集阶段
+    # ============ 1. 采集阶段 ============
     if args.reuse and os.path.exists(raw_path):
         print(f"[collect] 复用已有原始数据 {raw_path}")
     else:
         seq, all_recs = 1, []
         for query in query_list:
-            print(f"========== 正在搜索: {query} ==========")
+            print(f"========== 正在搜索主题: {query} ==========")
             for name, c in COLLECTORS.items():
                 raw = c.fetch(query, args.limit)
                 for x in raw:
                     all_recs.append(c.to_record(x, args.batch, seq, args.scenario))
                     seq += 1
+                print(f"[{name}] fetched {len(raw)}")
         dump_jsonl(all_recs, raw_path)
-        print(f"[collect] 共保存 {len(all_recs)} 条原始记录")
+        print(f"\n[collect] 共保存 {len(all_recs)} 条原始记录 -> {raw_path}")
 
-    # 清洗与过滤阶段
+    # ============ 2. 清洗与过滤阶段 ============
     raw_records = load_jsonl(raw_path)
     cleaned = []
     dropped_old = 0
@@ -85,7 +93,7 @@ def main():
     for r in raw_records:
         c = clean_record(r)
         
-        # 规则 1：时间过滤
+        # 规则 1：时间底线过滤（强制 >= 2021年）
         if not is_recent(c, start_year=2021):
             dropped_old += 1
             continue
@@ -115,12 +123,12 @@ def main():
     os.makedirs(f"data/cleaned/{args.batch}", exist_ok=True)
     dump_jsonl(cleaned, f"data/cleaned/{args.batch}/cleaned.jsonl")
 
-    # 去重阶段
+    # ============ 3. 去重阶段 ============
     kept, removed = dedup_exact(cleaned)
     dump_jsonl(kept, f"data/cleaned/{args.batch}/deduped.jsonl")
     print(f"[dedup] 最终保留 {len(kept)} 条，去重删除了 {len(removed)} 条")
 
-    # 导出阶段
+    # ============ 4. 导出阶段 ============
     export(kept, args.batch, out_path=f"results/{args.batch}/result1.csv")
 
 if __name__ == "__main__":
