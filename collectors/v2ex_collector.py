@@ -7,6 +7,7 @@ class V2EXCollector(BaseCollector):
     def fetch(self, query, limit=30):
         out = []
         headers = {"User-Agent": "Mozilla/5.0 (compatible; DataMiningBot/1.0)"}
+        # 抓取多个热门节点的最新和热门帖子
         urls = [
             "https://www.v2ex.com/api/topics/latest.json",
             "https://www.v2ex.com/api/topics/hot.json"

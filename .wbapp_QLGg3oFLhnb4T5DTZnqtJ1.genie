@@ -1,0 +1,5 @@
+appId: wbapp_QLGg3oFLhnb4T5DTZnqtJ1
+name: AI教育工作台
+localDir: E:\AIjiaoyu
+appType: web
+entryHtml: workbench/index.html

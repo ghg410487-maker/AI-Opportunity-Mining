@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>AI 教育工作台</title>
+<!-- CodeMirror 代码编辑器 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/theme/material-darker.min.css">
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/css/css.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/markdown/markdown.min.js"></script>
+<!-- WorkBuddy 云服务 SDK（AI 对话） -->
+<script src="https://cdn.jsdelivr.net/npm/@tencent-ai/workbuddy-cloud-sdk@dev/lib/index.global.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    background: #1e1e1e; color: #d4d4d4;
+    display: grid; grid-template-columns: 240px 1fr 380px;
+    overflow: hidden; font-size: 13px;
+  }
+  /* ============ 左栏 文件树 ============ */
+  #sidebar { background: #252526; border-right: 1px solid #333; display: flex; flex-direction: column; }
+  .panel-title { padding: 10px 14px; font-size: 11px; letter-spacing: 1px; color: #bbb; text-transform: uppercase; border-bottom: 1px solid #333; }
+  #tree { flex: 1; overflow: auto; padding: 6px 0; }
+  #tree ul { list-style: none; }
+  #tree li { cursor: pointer; }
+  .node { padding: 3px 10px; white-space: nowrap; color: #c5c5c5; }
+  .node:hover { background: #2a2d2e; }
+  .node.active { background: #37373d; color: #fff; }
+  .node .icon { margin-right: 6px; }
+  .node.dir .icon { color: #dcb67a; }
+  .node.file .icon { color: #6a9eda; }
+  .children { margin-left: 14px; display: none; }
+  .children.open { display: block; }
+  #tree-status { padding: 10px 14px; color: #888; font-size: 12px; }
+
+  /* ============ 中栏 编辑器 ============ */
+  #editor-pane { display: flex; flex-direction: column; overflow: hidden; }
+  #editor-bar { display: flex; align-items: center; background: #2d2d2d; border-bottom: 1px solid #333; padding: 0 8px; height: 36px; gap: 8px; }
+  #current-file { color: #e8e8e8; font-size: 13px; }
+  #dirty-dot { color: #e2c08d; display: none; }
+  #editor-bar .spacer { flex: 1; }
+  button {
+    background: #3c3c3c; color: #d4d4d4; border: 1px solid #505050; border-radius: 4px;
+    padding: 4px 12px; font-size: 12px; cursor: pointer;
+  }
+  button:hover { background: #4a4a4a; }
+  button.primary { background: #2c6e49; border-color: #2c6e49; color: #fff; }
+  button.primary:hover { background: #348257; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  #editor-wrap { flex: 1; position: relative; }
+  .CodeMirror { width: 100%; height: 100%; font-size: 13.5px; font-family: Consolas, "Courier New", monospace; }
+  #editor-placeholder {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; color: #6e6e6e; gap: 8px;
+  }
+
+  /* ============ 右栏 智能体 ============ */
+  #agent { background: #232323; border-left: 1px solid #333; display: flex; flex-direction: column; }
+  #agent-header { padding: 10px 12px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 8px; }
+  #agent-header .logo { color: #ffb86c; font-weight: 600; }
+  #model-select {
+    flex: 1; background: #1a1a1a; color: #d4d4d4; border: 1px solid #3c3c3c;
+    border-radius: 4px; padding: 4px 6px; font-size: 12px; outline: none; max-width: 190px;
+  }
+  #chat { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .msg { padding: 9px 12px; border-radius: 8px; line-height: 1.6; word-break: break-word; }
+  .msg .who { font-size: 11px; color: #8a8a8a; margin-bottom: 4px; }
+  .msg.user { background: #2d2d40; margin-left: 26px; }
+  .msg.bot { background: #2a2a2a; margin-right: 26px; }
+  .msg.bot pre {
+    background: #161616; border: 1px solid #333; border-radius: 6px;
+    padding: 8px 10px; margin: 6px 0; overflow-x: auto;
+    font-family: Consolas, monospace; font-size: 12.5px;
+  }
+  .msg.bot code.inline { background: #161616; padding: 1px 5px; border-radius: 3px; font-family: Consolas, monospace; }
+  .msg.error { background: #3d2222; color: #f48771; margin-right: 26px; }
+  .msg .thinking { color: #8a8a8a; font-size: 12px; }
+  #chat-hint { color: #777; text-align: center; margin-top: 30px; line-height: 1.8; padding: 0 20px; }
+  .ref-toggle { display: flex; align-items: center; gap: 6px; color: #aaa; font-size: 12px; }
+  #input-area { padding: 10px 12px 12px; border-top: 1px solid #333; display: flex; flex-direction: column; gap: 8px; }
+  #chat-input {
+    width: 100%; background: #1a1a1a; border: 1px solid #3c3c3c; border-radius: 6px;
+    color: #d4d4d4; padding: 9px 12px; font-size: 13px; outline: none; resize: none;
+    font-family: inherit; height: 64px;
+  }
+  #chat-input:focus { border-color: #555; }
+  #input-area .row { display: flex; align-items: center; gap: 8px; }
+  #input-area .row .spacer { flex: 1; }
+  #backend-banner {
+    background: #3a2d1e; color: #ffb86c; padding: 8px 12px; font-size: 12px;
+    border-bottom: 1px solid #55402a; display: none;
+  }
+  #llm-banner { background: #3d2222; color: #f48771; padding: 8px 12px; font-size: 12px; display: none; border-bottom: 1px solid #333; }
+</style>
+</head>
+<body>
+
+<!-- ===== 左栏 ===== -->
+<nav id="sidebar">
+  <div class="panel-title">资源管理器 · AIjiaoyu</div>
+  <div id="tree"><div id="tree-status">正在加载文件树…</div></div>
+</nav>
+
+<!-- ===== 中栏 ===== -->
+<main id="editor-pane">
+  <div id="editor-bar">
+    <span id="current-file">未打开文件</span>
+    <span id="dirty-dot">● 未保存</span>
+    <span class="spacer"></span>
+    <button id="btn-save">保存 (Ctrl+S)</button>
+    <button id="btn-ask">让 AI 看这个文件</button>
+  </div>
+  <div id="editor-wrap">
+    <div id="editor-placeholder">
+      <div style="font-size:34px">⌘</div>
+      <div>点击左侧文件打开代码</div>
+      <div id="backend-banner" style="position:static;margin-top:10px"></div>
+    </div>
+    <textarea id="code"></textarea>
+  </div>
+</main>
+
+<!-- ===== 右栏 ===== -->
+<aside id="agent">
+  <div id="agent-header">
+    <span class="logo">✳ 智能体</span>
+    <select id="model-select"><option>加载模型中…</option></select>
+    <button id="btn-newchat" title="开始新对话">新对话</button>
+  </div>
+  <div id="llm-banner"></div>
+  <div id="chat">
+    <div id="chat-hint">我是这个项目的工作台智能体，可以帮你<br>读代码 · 改代码 · 排查问题 · 解释逻辑<br>提问时会自动带上你当前打开的文件（可关闭）</div>
+  </div>
+  <div id="input-area">
+    <label class="ref-toggle"><input type="checkbox" id="ref-file" checked> 提问时附带当前打开的文件内容</label>
+    <textarea id="chat-input" placeholder="输入问题，Enter 发送，Shift+Enter 换行"></textarea>
+    <div class="row">
+      <button id="btn-send" class="primary">发送</button>
+      <button id="btn-stop" disabled>停止</button>
+      <span class="spacer"></span>
+      <span id="usage" style="color:#777;font-size:11px"></span>
+    </div>
+  </div>
+</aside>
+
+<script>
+/* ================= 配置（由云服务开通时返回） ================= */
+const CLOUD_CONFIG = {
+  endpoint: "https://ai-edu-workbench-93099.app.workbuddy.host",
+  publishableKey: "wbpk_QLGg3oFLhnb4T5DTZnqtJ1_WCPgMtNNxxRM9C7dl7pmdxUBZFKvMXZs",
+};
+const SYSTEM_PROMPT = "你是内嵌在用户项目「AIjiaoyu」（一个 AI 教育方向的数据采集/清洗/分析 Python 项目，位于本机 E:\\AIjiaoyu）工作台里的编程助手。回答要简洁、直接、可执行，用简体中文。涉及代码时给出具体代码片段。当用户消息里附带文件内容时，优先基于该文件内容回答。不要编造文件里不存在的内容。";
+
+/* ================= 工具 ================= */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+let API_BASE = "";
+async function api(path, opts) {
+  try {
+    const r = await fetch(API_BASE + path, opts);
+    return await r.json();
+  } catch (e) {
+    // 页面若不是由本地服务打开（如静态预览），回退到本机固定端口
+    if (!API_BASE) {
+      API_BASE = "http://127.0.0.1:8765";
+      const r = await fetch(API_BASE + path, opts);
+      return await r.json();
+    }
+    throw e;
+  }
+}
+
+/* ================= 编辑器 ================= */
+const MODES = {
+  py: "python", js: "javascript", ts: "javascript", json: {name:"javascript", json:true},
+  md: "markdown", html: "htmlmixed", htm: "htmlmixed", css: "css",
+  xml: "xml", csv: null, txt: null, yml: null, yaml: null,
+};
+const cm = CodeMirror.fromTextArea($("code"), {
+  theme: "material-darker", lineNumbers: true, indentUnit: 4,
+  lineWrapping: false, matchBrackets: true,
+});
+let currentPath = null, dirty = false;
+cm.on("change", () => { if (currentPath) { dirty = true; $("dirty-dot").style.display = "inline"; } });
+
+function fileMode(name) {
+  const ext = name.split(".").pop().toLowerCase();
+  return MODES[ext] ?? null;
+}
+async function openFile(path) {
+  const res = await api("/api/file?path=" + encodeURIComponent(path));
+  if (!res.ok) { alert(res.error); return; }
+  currentPath = res.path; dirty = false;
+  $("current-file").textContent = res.path;
+  $("dirty-dot").style.display = "none";
+  $("editor-placeholder").style.display = "none";
+  cm.setOption("mode", fileMode(res.path) || "null");
+  cm.setValue(res.content);
+  cm.refresh(); cm.focus();
+  document.querySelectorAll(".node").forEach(n => n.classList.toggle("active", n.dataset.path === path));
+}
+async function saveFile() {
+  if (!currentPath) return;
+  const res = await api("/api/save", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ path: currentPath, content: cm.getValue() }),
+  });
+  if (res.ok) { dirty = false; $("dirty-dot").style.display = "none"; flashSave(); }
+  else alert("保存失败：" + res.error);
+}
+function flashSave() {
+  const el = $("current-file"); const old = el.textContent;
+  el.textContent = "✓ 已保存 " + old;
+  setTimeout(() => { if (el.textContent === "✓ 已保存 " + old) el.textContent = old; }, 1200);
+}
+$("btn-save").onclick = saveFile;
+document.addEventListener("keydown", (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === "s") { e.preventDefault(); saveFile(); }
+});
+
+/* ================= 文件树 ================= */
+function renderTree(node, container) {
+  const ul = document.createElement("ul");
+  container.appendChild(ul);
+  for (const child of node.children || []) {
+    const li = document.createElement("li");
+    const div = document.createElement("div");
+    div.className = "node " + child.type;
+    div.innerHTML = `<span class="icon">${child.type === "dir" ? "📁" : "📄"}</span>${esc(child.name)}`;
+    li.appendChild(div);
+    ul.appendChild(li);
+    if (child.type === "dir") {
+      div.onclick = () => {
+        const kids = li.querySelector(".children");
+        kids.classList.toggle("open");
+        div.querySelector(".icon").textContent = kids.classList.contains("open") ? "📂" : "📁";
+      };
+      const kidsBox = document.createElement("div");
+      kidsBox.className = "children";
+      li.appendChild(kidsBox);
+      renderTree(child, kidsBox);
+    } else {
+      div.dataset.path = child._path || child.name;
+      div.onclick = () => openFile(div.dataset.path);
+    }
+  }
+}
+/* 递归计算文件相对路径 */
+function assignPaths(node, prefix) {
+  for (const c of node.children || []) {
+    if (c.type === "dir") assignPaths(c, prefix + c.name + "/");
+    else c._path = prefix + c.name;
+  }
+}
+async function loadTree() {
+  try {
+    const res = await api("/api/tree");
+    if (!res.ok) throw new Error(res.error);
+    assignPaths(res.tree, "");
+    const box = $("tree"); box.innerHTML = "";
+    renderTree(res.tree, box);
+  } catch (e) {
+    $("tree").innerHTML = `<div id="tree-status">⚠️ 无法连接本地服务<br><br>请在项目目录运行：<br><code>python workbench/server.py</code><br><br>然后访问 http://127.0.0.1:8765</div>`;
+    $("tree-status") && ($("tree-status").style.lineHeight = "1.8");
+  }
+}
+loadTree();
+
+/* ================= AI 对话（WorkBuddy 云服务 LLM） ================= */
+const cloud = WorkBuddyCloud.createWorkBuddyCloud({
+  endpoint: CLOUD_CONFIG.endpoint,
+  publishableKey: CLOUD_CONFIG.publishableKey,
+});
+let modelId = null, conversationId = crypto.randomUUID();
+let history = [];            // [{role, content}] 不含 system
+let generating = false, controller = null;
+
+async function initModels() {
+  const sel = $("model-select");
+  try {
+    const models = await cloud.llm.models.list();
+    const usable = models.filter(m => m.disabled !== true);
+    if (!usable.length) {
+      sel.innerHTML = "<option>暂无可用模型</option>"; return;
+    }
+    sel.innerHTML = usable.map(m =>
+      `<option value="${esc(m.id)}">${esc(m.name ?? m.id)}</option>`).join("");
+    modelId = usable[0].id;
+    sel.onchange = () => { modelId = sel.value; };
+  } catch (e) {
+    showLLMBanner("模型列表加载失败：" + errText(e));
+  }
+}
+function errText(e) {
+  const c = e && e.error && e.error.code ? `[${e.error.code}] ` : "";
+  return c + (e && e.message ? e.message : String(e));
+}
+function showLLMBanner(text) {
+  const b = $("llm-banner"); b.textContent = text; b.style.display = "block";
+}
+
+function renderMsgEl(role, html) {
+  const chat = $("chat");
+  const hint = $("chat-hint"); if (hint) hint.remove();
+  const div = document.createElement("div");
+  div.className = "msg " + role;
+  div.innerHTML = `<div class="who">${role === "user" ? "你" : "✳ 智能体"}</div><div class="body">${html}</div>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+  return div.querySelector(".body");
+}
+/* 简易 markdown：代码块 + 行内代码 + 换行 */
+function mdRender(text) {
+  const parts = text.split(/```(?:\w*)\n?/);
+  let out = "";
+  for (let i = 0; i < parts.length; i++) {
+    if (i % 2 === 1) out += "<pre>" + esc(parts[i].replace(/\n$/, "")) + "</pre>";
+    else out += esc(parts[i]).replace(/`([^`]+)`/g, "<code class='inline'>$1</code>").replace(/\n/g, "<br>");
+  }
+  return out;
+}
+
+function setGenerating(on) {
+  generating = on;
+  $("btn-send").disabled = on; $("btn-stop").disabled = !on;
+  $("btn-send").textContent = on ? "生成中…" : "发送";
+}
+
+async function send(question, fileContext) {
+  if (generating || !modelId) return;
+  let content = question;
+  if (fileContext) content = `当前打开的文件 ${fileContext.path}：\n\`\`\`\n${fileContext.content.slice(0, 8000)}\n\`\`\`\n\n我的问题：${question}`;
+  history.push({ role: "user", content });
+  renderMsgEl("user", mdRender(content));
+  const body = renderMsgEl("bot", '<span class="thinking">思考中…</span>');
+  controller = new AbortController();
+  setGenerating(true);
+  let answer = "";
+  try {
+    const stream = cloud.llm.chat.completions.create({
+      model: modelId,
+      messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history],
+      stream: true,
+      stream_options: { include_usage: true },
+      conversationId,
+      signal: controller.signal,
+    });
+    for await (const chunk of stream) {
+      const d = chunk.choices[0]?.delta;
+      if (d && d.content) {
+        answer += d.content;
+        body.innerHTML = mdRender(answer);
+        $("chat").scrollTop = $("chat").scrollHeight;
+      }
+      if (chunk.usage) {
+        $("usage").textContent = `本次 ${chunk.usage.total_tokens ?? "?"} tokens`;
+      }
+    }
+    if (!answer) body.innerHTML = '<span class="thinking">（模型没有返回内容）</span>';
+    history.push({ role: "assistant", content: answer });
+  } catch (e) {
+    if (answer) {
+      body.innerHTML = mdRender(answer) + `<div class="thinking">（流被中断，以上为已生成部分）</div>`;
+      history.push({ role: "assistant", content: answer });
+    } else {
+      const code = e && e.error && e.error.code ? e.error.code : "";
+      let hint = "";
+      if (code.startsWith("auth_")) hint = "<br>可能原因：当前页面来源未被云服务允许。请通过本地服务 http://127.0.0.1:8765 打开本页面。";
+      if (code.startsWith("quota_")) hint = "<br>云服务配额不足，可在 WorkBuddy 云服务面板查看。";
+      if (code.startsWith("gateway_") || code.startsWith("model_")) hint = "<br>模型服务暂时不可用，请点「发送」重试。";
+      body.innerHTML = ""; body.closest(".msg").className = "msg error";
+      body.innerHTML = `请求失败：${esc(errText(e))}${hint}`;
+    }
+  } finally {
+    setGenerating(false); controller = null;
+    $("chat").scrollTop = $("chat").scrollHeight;
+  }
+}
+
+function currentFileContext() {
+  if (!currentPath || !$("ref-file").checked) return null;
+  return { path: currentPath, content: cm.getValue() };
+}
+function doSend() {
+  const inp = $("chat-input");
+  const q = inp.value.trim();
+  if (!q) return;
+  inp.value = "";
+  send(q, currentFileContext());
+}
+$("btn-send").onclick = doSend;
+$("chat-input").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); doSend(); }
+});
+$("btn-stop").onclick = () => controller && controller.abort();
+$("btn-newchat").onclick = () => {
+  history = []; conversationId = crypto.randomUUID();
+  $("chat").innerHTML = `<div id="chat-hint">已开始新对话<br>提问时会自动带上你当前打开的文件（可关闭）</div>`;
+  $("usage").textContent = "";
+};
+$("btn-ask").onclick = () => {
+  if (!currentPath) { alert("请先在左侧打开一个文件"); return; }
+  $("chat-input").value = "请帮我看看这个文件，解释它的逻辑，指出潜在问题。";
+  $("ref-file").checked = true;
+  doSend();
+};
+
+initModels();
+</script>
+</body>
+</html>

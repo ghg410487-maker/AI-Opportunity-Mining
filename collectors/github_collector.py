@@ -11,10 +11,10 @@ class GitHubCollector(BaseCollector):
         if token:
             headers["Authorization"] = f"Bearer {token}"
 
-        # 1. 搜仓库
+        # 1. 搜仓库（限制2021年以后）
         try:
             r = requests.get("https://api.github.com/search/repositories", 
-                             params={"q": query, "sort": "stars", "per_page": limit//2}, 
+                             params={"q": f"{query} created:>2021-01-01", "sort": "stars", "per_page": limit//2}, 
                              headers=headers, timeout=20)
             if r.status_code == 200:
                 for it in r.json().get("items", []):
@@ -28,17 +28,17 @@ class GitHubCollector(BaseCollector):
         except Exception as e:
             print(f"[GitHub Repo] error: {e}")
 
-        # 2. 搜 Issues（求助、痛点）
+        # 2. 搜 Issues（求助、痛点，限制2021年以后）
         try:
-            time.sleep(2) # 避免超频
+            time.sleep(2) 
             r = requests.get("https://api.github.com/search/issues", 
-                             params={"q": f"{query} type:issue", "sort": "reactions", "per_page": limit//2}, 
+                             params={"q": f"{query} type:issue created:>2021-01-01", "sort": "reactions", "per_page": limit//2}, 
                              headers=headers, timeout=20)
             if r.status_code == 200:
                 for it in r.json().get("items", []):
                     out.append({
                         "title": it.get("title", ""),
-                        "content": (it.get("body") or ""), # 这里藏着真实痛点
+                        "content": (it.get("body") or ""), 
                         "url": it.get("html_url", ""),
                         "published_at": (it.get("created_at") or "")[:10],
                         "heat": {"stars": None, "discussion": it.get("comments", 0), "views": None, "collects": None, "shares": None}
