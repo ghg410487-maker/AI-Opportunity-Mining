@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from config.official_headers import RESULT1
 
-HEAT_COL = "热度指标（点赞数、评论数、收藏数、转发量等）"
+HEAT_COL = "热度指标（如浏览数、点赞数、讨论数等）"
 SNAPSHOT_DIR = "data/snapshots"
 
 

@@ -1,4 +1,5 @@
 import re
+import datetime
 
 URL_RE = re.compile(r"https?://\S+")
 WS_RE = re.compile(r"[ \t\u3000]+")
@@ -22,9 +23,13 @@ def clean_record(rec: dict) -> dict:
     r["_raw_title"] = rec.get("title", "")
     r["content"] = clean_text(rec.get("content", ""))
     r["title"] = clean_text(rec.get("title", ""))
+
     for k in ["source_url", "source_name", "published_at"]:
         if r.get(k) is None:
             r[k] = ""
-    if r.get("published_at") is None:
+
+    # 修复 1970 年的脏时间，置为空
+    if r["published_at"].startswith("1970") or r["published_at"] == "0":
         r["published_at"] = ""
+
     return r
