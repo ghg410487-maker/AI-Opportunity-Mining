@@ -1,4 +1,26 @@
-# Python
+<<<<<<< HEAD
+# Python# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# 数据与结果（不要传到 GitHub）
+data/
+results/
+experiments/datasets/
+
+# IDE
+.vscode/
+.idea/
+
+# 系统
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
 __pycache__/
 *.py[cod]
 *.pyd
@@ -54,3 +76,10 @@ official_materials/
 !data/processed/.gitkeep
 !results/.gitkeep
 
+=======
+.venv/
+__pycache__/
+*.pyc
+data/
+results/
+>>>>>>> 38ccfeb (feat: Task1 完全体，成功采集多源 127 条数据)
