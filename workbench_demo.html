@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>三栏工作台演示</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 220px 1fr 340px;
+    overflow: hidden;
+  }
+  /* ===== 左栏：文件树 ===== */
+  .sidebar {
+    background: #252526;
+    border-right: 1px solid #333;
+    padding: 12px 0;
+    overflow-y: auto;
+  }
+  .sidebar h3 {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #bbbbbb;
+    padding: 8px 16px;
+  }
+  .tree { list-style: none; font-size: 13px; }
+  .tree li { padding: 4px 16px; cursor: pointer; color: #c5c5c5; }
+  .tree li:hover { background: #2a2d2e; }
+  .tree li.active { background: #37373d; color: #ffffff; }
+  .tree li.folder::before { content: "📁 "; }
+  .tree li.file::before { content: "📄 "; }
+  .indent { margin-left: 18px; }
+
+  /* ===== 中栏：代码 ===== */
+  .editor { display: flex; flex-direction: column; overflow: hidden; }
+  .tabbar {
+    background: #2d2d2d;
+    display: flex;
+    border-bottom: 1px solid #333;
+  }
+  .tab {
+    padding: 8px 18px;
+    font-size: 13px;
+    color: #969696;
+    background: #2d2d2d;
+    border-right: 1px solid #333;
+  }
+  .tab.active { background: #1e1e1e; color: #ffffff; border-top: 2px solid #4fc1ff; }
+  .code-wrap { flex: 1; overflow: auto; }
+  .code-wrap pre {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    padding: 14px 20px;
+  }
+  .ln { display: inline-block; width: 38px; color: #5a5a5a; text-align: right; margin-right: 18px; user-select: none; }
+  .kw { color: #c586c0; }      /* import/if/for */
+  .fn  { color: #dcdcaa; }     /* 函数名 */
+  .str { color: #ce9178; }     /* 字符串 */
+  .num { color: #b5cea8; }     /* 数字 */
+  .cm  { color: #6a9955; }     /* 注释 */
+  .builtin { color: #4fc1ff; }
+
+  /* ===== 右栏：智能体 ===== */
+  .agent {
+    background: #232323;
+    border-left: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+  }
+  .agent-header {
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    color: #ffb86c;
+  }
+  .chat { flex: 1; padding: 14px; overflow-y: auto; font-size: 13px; line-height: 1.6; }
+  .msg { margin-bottom: 14px; padding: 10px 12px; border-radius: 8px; }
+  .msg.user { background: #2d2d40; margin-left: 30px; }
+  .msg.bot  { background: #2a2a2a; margin-right: 30px; }
+  .msg .who { font-size: 11px; color: #888; margin-bottom: 4px; }
+  .input-area { padding: 12px; border-top: 1px solid #333; }
+  .input-area input {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #3c3c3c;
+    border-radius: 6px;
+    color: #d4d4d4;
+    padding: 9px 12px;
+    font-size: 13px;
+    outline: none;
+  }
+  .badge {
+    display: inline-block;
+    background: #3a2d1e;
+    color: #ffb86c;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 左栏 -->
+<nav class="sidebar">
+  <h3>资源管理器</h3>
+  <ul class="tree">
+    <li class="folder">AIjiaoyu</li>
+    <li class="file indent">backend</li>
+    <li class="folder indent">collectors</li>
+    <li class="folder indent">data</li>
+    <li class="folder indent">frontend</li>
+    <li class="folder indent">processing</li>
+    <li class="folder indent">scripts</li>
+    <li class="file indent2 indent">build_result1.py</li>
+    <li class="file indent2 indent active">fix_b08_evidence.py</li>
+    <li class="file indent2 indent">package_audit_data.py</li>
+    <li class="folder indent">tests</li>
+  </ul>
+</nav>
+
+<!-- 中栏 -->
+<main class="editor">
+  <div class="tabbar">
+    <div class="tab">fix_b08_evidence.py</div>
+    <div class="tab">dedup.py</div>
+    <div class="tab">Claude 面板演示</div>
+  </div>
+  <div class="code-wrap"><pre><code><span class="ln"> 1</span><span class="kw">import</span> json
+<span class="ln"> 2</span><span class="kw">import</span> os
+<span class="ln"> 3</span><span class="kw">import</span> sys
+<span class="ln"> 4</span>sys.path.insert(<span class="num">0</span>, os.path.abspath(os.path.join(os.path.dirname(<span class="builtin">__file__</span>), <span class="str">".."</span>)))
+<span class="ln"> 5</span>
+<span class="ln"> 6</span><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="ln"> 7</span>
+<span class="ln"> 8</span><span class="kw">from</span> processing.clean <span class="kw">import</span> clean_record
+<span class="ln"> 9</span><span class="kw">from</span> processing.dedup <span class="kw">import</span> dedup_exact
+<span class="ln">10</span><span class="kw">from</span> processing.export_result1 <span class="kw">import</span> export
+<span class="ln">11</span><span class="kw">from</span> collectors.base <span class="kw">import</span> dump_jsonl
+<span class="ln">12</span>
+<span class="ln">13</span><span class="cm"># 曹要求：为了不覆盖旧的127条版本，新版命名为 B08_new</span>
+<span class="ln">14</span>BATCH = <span class="str">"B08_new"</span>
+<span class="ln">15</span>raw_path = <span class="str">f"data/raw/{BATCH}/records.jsonl"</span>
+<span class="ln">16</span>
+<span class="ln">17</span><span class="kw">if not</span> os.path.exists(raw_path):
+<span class="ln">18</span>    <span class="builtin">print</span>(<span class="str">f"找不到 {raw_path}，请确认本地文件是否存在"</span>)
+<span class="ln">19</span>    sys.exit(<span class="num">1</span>)
+<span class="ln">20</span>
+<span class="ln">21</span><span class="kw">with</span> <span class="builtin">open</span>(raw_path, encoding=<span class="str">"utf-8"</span>) <span class="kw">as</span> f:
+<span class="ln">22</span>    raw_records = [json.loads(line) <span class="kw">for</span> line <span class="kw">in</span> f <span class="kw">if</span> line.strip()]
+<span class="ln">23</span>
+<span class="ln">24</span><span class="builtin">print</span>(<span class="str">f"读取到 {len(raw_records)} 条原始记录"</span>)
+<span class="ln">25</span>
+<span class="ln">26</span><span class="cm"># 1. 清洗并过滤残次品</span>
+<span class="ln">27</span>valid_records = []
+<span class="ln">28</span>dropped_count = <span class="num">0</span>
+<span class="ln">29</span><span class="kw">for</span> r <span class="kw">in</span> raw_records:
+<span class="ln">30</span>    c = <span class="fn">clean_record</span>(r)
+<span class="ln">31</span>
+<span class="ln">32</span>    <span class="cm"># 过滤规则 1：正文为空（或者只有一两个字），直接丢弃</span>
+<span class="ln">33</span>    <span class="kw">if</span> <span class="builtin">len</span>(c.get(<span class="str">"content"</span>, <span class="str">""</span>)) &lt; <span class="num">5</span>:
+<span class="ln">34</span>        dropped_count += <span class="num">1</span>
+<span class="ln">35</span>        <span class="kw">continue</span>
+<span class="ln">36</span>
+<span class="ln">37</span>    <span class="cm"># 过滤规则 2：B站链接没有 BV 号，直接丢弃</span>
+<span class="ln">38</span>    <span class="kw">if</span> c[<span class="str">"source_name"</span>] == <span class="str">"哔哩哔哩"</span> <span class="kw">and</span> <span class="str">"BV"</span> <span class="kw">not in</span> c[<span class="str">"source_url"</span>]:
+<span class="ln">39</span>        dropped_count += <span class="num">1</span>
+<span class="ln">40</span>        <span class="kw">continue</span>
+<span class="ln">41</span>
+<span class="ln">42</span>    valid_records.append(c)
+<span class="ln">43</span>
+<span class="ln">44</span><span class="builtin">print</span>(<span class="str">f"过滤掉 {dropped_count} 条无效数据，剩余 {len(valid_records)} 条有效数据"</span>)
+<span class="ln">45</span>
+<span class="ln">46</span><span class="cm"># 保存清洗后的有效数据（供核对）</span>
+<span class="ln">47</span>os.makedirs(<span class="str">f"data/cleaned/{BATCH}"</span>, exist_ok=<span class="kw">True</span>)
+<span class="ln">48</span><span class="fn">dump_jsonl</span>(valid_records, <span class="str">f"data/cleaned/{BATCH}/cleaned.jsonl"</span>)
+</code></pre></div>
+</main>
+
+<!-- 右栏 -->
+<aside class="agent">
+  <div class="agent-header">✳ WorkBuddy 智能体</div>
+  <div class="chat">
+    <div class="msg user">
+      <div class="who">你</div>
+      帮我看看 fix_b08_evidence.py 的过滤逻辑有没有问题？
+    </div>
+    <div class="msg bot">
+      <div class="who">WorkBuddy</div>
+      看过了：两条过滤规则（正文 &lt; 5 字符、B站无 BV 号）逻辑清晰。一个小建议——B站分享链接有时候是 b23.tv 短链，不含 BV，会被误杀，要不要加一条「短链先展开再判断」？
+      <br><span class="badge">已读取 scripts/fix_b08_evidence.py</span>
+    </div>
+    <div class="msg user">
+      <div class="who">你</div>
+      好，加上吧
+    </div>
+    <div class="msg bot">
+      <div class="who">WorkBuddy</div>
+      已在过滤规则 2 前插入短链展开逻辑，并补了一条单测。✅
+    </div>
+  </div>
+  <div class="input-area">
+    <input type="text" placeholder="输入消息…（演示用）">
+  </div>
+</aside>
+
+</body>
+</html>

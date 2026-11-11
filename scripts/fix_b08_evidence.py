@@ -10,7 +10,8 @@ from processing.dedup import dedup_exact
 from processing.export_result1 import export
 from collectors.base import dump_jsonl
 
-BATCH = "B08"
+# 曹要求：为了不覆盖旧的127条版本，新版命名为 B08_new
+BATCH = "B08_new"
 raw_path = f"data/raw/{BATCH}/records.jsonl"
 
 if not os.path.exists(raw_path):
