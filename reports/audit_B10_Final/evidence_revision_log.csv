@@ -1,0 +1,77 @@
+﻿record_id,source,original_e_type,new_e_type,inclusion_status,revision_reason,evidence_snippet
+B10-S00001,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,jushbjj/mr.-ranedeer-ai-tutor a gpt-4 ai tutor prompt for cu
+B10-S00002,GitHub,待核实,E4(技术供给),辅助技术参考,纯技术代码问题，不体现真实教育需求,exorust/torchleet leetcode for pytorch — 65 ml/ai interview 
+B10-S00003,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,nutlope/llamatutor an ai personal tutor built with llama 3.1
+B10-S00004,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,hugecatlab/chattutor 👨‍🏫 chattutor: visual and interactive a
+B10-S00005,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,plastic-labs/tutor-gpt ai tutor powered by theory-of-mind re
+B10-S00006,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,aaryansamanta/ai-ethos 501(c)(3) nonprofit delivering ethica
+B10-S00007,GitHub,待核实,E4(技术供给),辅助技术参考,纯技术代码问题，不体现真实教育需求,zekainie/universal-examprep-skill exam cram coach · 跨会话记忆与讲义
+B10-S00011,GitHub,待核实,E3(学术研究),正式纳入,OpenAlex论文，属于学术证据,[feature request] add latex/katex math rendering to tui ## s
+B10-S00013,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,v3.0.1 render function in submitusermessage not parsing para
+B10-S00015,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,【ai家教】子未学ai家教？超简单免费真香，2分钟搞定辅导！ | ai tutor super easy free ho
+B10-S00016,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,ib数学60秒提分技巧：这个思路能让你少错一半题｜mathsaa/ai都适用 ib 数学考试时，很多学生不是不会做，而是
+B10-S00017,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,is tutoring worth it by a 10+ years tutor is tutoring worth 
+B10-S00018,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,【整凑数】a new era: intelligent tutoring systems will transform 
+B10-S00055,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,an ai-augmented scaffolded framework for data-driven languag
+B10-S00057,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,下一代个性化学习：生成式人工智能增强智能辅导系统 - 开放教育研究 下一代个性化学习：生成式人工智能增强智能辅导系统 &
+B10-S00059,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,track: ai for teaching and learning - di-idea track: ai for 
+B10-S00061,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,智能教育研究院 - 上海智能教育研究院 智能教育研究院 &nbsp;&nbsp; 上海智能教育研究院
+B10-S00063,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,教育学院112 - 北京大学 教育学院112 &nbsp;&nbsp; 北京大学
+B10-S00064,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,master of educational technology - degree programs for inter
+B10-S00065,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,me310设计思维课程 - 清华大学未来实验室 me310设计思维课程 &nbsp;&nbsp; 清华大学未来实验室
+B10-S00085,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,[独家ai翻译] 达芬奇创意电影外观色彩分级调色课程 中文字幕 color grading on davinci res
+B10-S00124,掘金,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,前端转全栈: next.js + chatgpt 开发 aigc 知识库(ai 写作) 欢迎围观~ 大家好，我是前端双越
+B10-S00142,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,国家智慧教育公共服务平台 - 国家智慧教育公共服务平台 国家智慧教育公共服务平台 &nbsp;&nbsp; 国家智慧教育
+B10-S00145,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,中华人民共和国教育部政府门户网站 - 中华人民共和国教育部政府门户网站 中华人民共和国教育部政府门户网站 &nbsp;&
+B10-S00148,教育官方新闻,待核实,E3(学术研究),正式纳入,官方发布论文，本质为学术内容，非机构采购行动,probabilistic graph models for peer assessment based on stud
+B10-S00149,教育官方新闻,待核实,E3(学术研究),正式纳入,官方发布论文,edumars: can vision-language models grade like teachers? ben
+B10-S00150,教育官方新闻,待核实,E3(学术研究),正式纳入,官方发布论文,"trustworthy ai in education: framework, cases, and governanc"
+B10-S00152,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,基于ai技术的数字系统实践课程教改应用 - 电气电子教学学报 基于ai技术的数字系统实践课程教改应用 &nbsp;&nb
+B10-S00158,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,tochusc/ai-assistant-teaching-website [ai-assistant] “通慧智教”-
+B10-S00160,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,sirhanmacx/claw-ed local-first ai teaching assistant for edi
+B10-S00161,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,jaluoma/pruju-ai an ai teaching assistant that allows studen
+B10-S00171,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,hplc teaching assistant-独立网页版 hplc teaching assistant 最初是由日内
+B10-S00172,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,uk teaching assistant convicted of grooming 15-year-old stud
+B10-S00174,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,04meet your teaching assistant供应链管理技术与系统 edx 《supply chain t
+B10-S00175,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,雅思英语单词coordinator teaching assistant counselor advisor postg
+B10-S00179,哔哩哔哩,待核实,E1(直接需求),正式纳入,明确真实求助/吐槽信号,ta(teaching assistant)是什么？如何申请？ta的主要职责是什么？留学生因为文化差异需要注意什么？——
+B10-S00180,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,教学助理/助教 面试 问答 (teaching assistant interview q&a) 在此面试培训视频教程中
+B10-S00228,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,on the design of ai teaching assistants for algorithm course
+B10-S00229,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,ai助教助力“电路原理”规模化因材施教 - 电气电子教学学报 ai助教助力“电路原理”规模化因材施教 &nbsp;&nb
+B10-S00235,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,heavyweight launch: one-stop academic support with no need t
+B10-S00236,教育官方新闻,待核实,E2(机构行动),正式纳入,官方政策/机构通知,artificial intelligence in education: challenges and opportu
+B10-S00238,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,ruvnet/ruflo 🌊 the original agent harness. deploy intelligen
+B10-S00239,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,ashishpatel26/500-ai-machine-learning-deep-learning-computer
+B10-S00240,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,genesis-embodied-ai/genesis-world simulation platform for ge
+B10-S00241,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,harvard-edge/cs249r_book machine learning systems: foundatio
+B10-S00243,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,huggingface/lerobot 🤗 lerobot: making ai for robotics more a
+B10-S00244,GitHub,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,dair-ai/ml-youtube-courses 📺 discover the latest machine lea
+B10-S00252,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,udemy - hands-on deep learning with pytorch: from math to mo
+B10-S00253,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,2026优化版！【深度学习花书《deep learning》】全书讲解（35集全）刷完封神！人工智能丨机器学习丨ai丨神
+B10-S00254,哔哩哔哩,待核实,E1(直接需求),正式纳入,明确真实求助/吐槽信号,“听着像有人在慢慢学怎么爱人”｜learning how to love 学爱这件事，大概没人一次就学会。本鱼把字摆得很
+B10-S00255,哔哩哔哩,待核实,E1(直接需求),正式纳入,明确真实求助/吐槽信号,掌控 二創｜he is learning 【在他掌控之下】leo&nico晨间vlog 【掌控之下】脆弱又迷人的leo老
+B10-S00256,哔哩哔哩,待核实,E3(学术研究),正式纳入,学术论文摘要，支持教育研究,【2027最新强化学习】rl零基础入门到精通保姆级学习路线！整整100集！一口气带你吃透ppo、dqn、q-learni
+B10-S00258,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,强推！【2027最新强化学习】理论与实战保姆级全套教程，整整100集，一口气带你吃透ppo算法、dqn算法、a3c、q-
+B10-S00259,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,【2027最新版】强化学习保姆级全套课程！整整100集！涵盖ppo算法、dqn算法、a3cq、learning、dpo等
+B10-S00260,哔哩哔哩,待核实,E1(直接需求),正式纳入,明确真实求助/吐槽信号,初中英语晨读系列 ① my ways of learning① 初中英语晨读系列 ① saving animals① 初
+B10-S00261,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,【每日前沿文章·agent】失败的题换个框架再学｜harness-s: learning from sibling ha
+B10-S00262,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,【2027新版】强化学习从入门到精通保姆级教程，三天学透！整整100集，一口气带你吃透ppo算法、dqn算法、a3c、q
+B10-S00263,哔哩哔哩,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,2027最新【强化学习】入门保姆级教程！适合所有零基础小白学习，一口气带你吃透ppo、dqn、q-learning、dp
+B10-S00264,哔哩哔哩,待核实,E3(学术研究),正式纳入,学术论文摘要,【2027最新】强化学习零基础入门到精通保姆级教程！100集整，一口气带你吃透ppo、dqn、q-learning、dp
+B10-S00265,哔哩哔哩,待核实,E3(学术研究),正式纳入,学术论文摘要,强推！不愧是2027全b站最强最通俗易懂的【强化学习】入门教程了！一口气带你吃透ppo算法、dqn、a3c、q-lear
+B10-S00266,哔哩哔哩,待核实,E1(直接需求),正式纳入,明确真实求助/吐槽信号,【2027新版】不愧是b站最通俗易懂的强化学习保姆级教程，整整100集，一口气带你吃透ppo算法、dqn算法、a3c、q
+B10-S00269,掘金,待核实,E3(学术研究),正式纳入,学术论文摘要,ai学习工具三剑客：notebooklm、gemini guided learning与chatgpt study深度对
+B10-S00280,掘金,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,一文通俗讲解什么是元学习（meta-learning） 什么是元学习呢？ 元学习通俗的来说，就是去学习如何学习（lear
+B10-S00281,掘金,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,热题解析：什么是few-shot learning？为什么给几个例子模型就能学会？ few-shot learning是
+B10-S00282,掘金,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,"深度学习与计算机视觉教程(17) | 深度强化学习 (马尔可夫决策过程,q-learning,dqn)（cv通关指南·完"
+B10-S00298,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,learning machine learning and ai 
+B10-S00299,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,ai djl no deep learning model found in karaf application 
+B10-S00300,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,learning with ai without becoming dependent on it or lazy 
+B10-S00301,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,is there any point of learning new programing languages with
+B10-S00304,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,httperror 403 with consumer_invalid as the reason when deplo
+B10-S00305,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,massaging data issues for an ai learning project using pytho
+B10-S00306,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,python: reinforcement learning tic-tac-toe ai working? 
+B10-S00307,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,h2o ai with own python machine learning model integration wi
+B10-S00308,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,how to identify relevant columns in very wide tables using a
+B10-S00311,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,deployment fail when provisioning endpoint in azure ai machi
+B10-S00312,Stack Exchange,待核实,E5(证据不足),排除,无具体需求或教育特征极弱,deep learning ai for integers in a sequence 
