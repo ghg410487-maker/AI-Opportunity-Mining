@@ -6,8 +6,15 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-# 这里已经把 B11 到 B14 全部加进去了
-BATCHES = ["B10", "B11", "B12", "B13", "B14"]
+# 这里已经完整包含了之前的 5 个基础批次和新增的 20 个 SUPER 巨量批次
+BATCHES = [
+    "B10", "B11", "B12", "B13", "B14",
+    "SUPER_part1", "SUPER_part2", "SUPER_part3", "SUPER_part4", "SUPER_part5",
+    "SUPER_part6", "SUPER_part7", "SUPER_part8", "SUPER_part9", "SUPER_part10",
+    "SUPER_part11", "SUPER_part12", "SUPER_part13", "SUPER_part14", "SUPER_part15",
+    "SUPER_part16", "SUPER_part17", "SUPER_part18", "SUPER_part19", "SUPER_part20"
+]
+
 REPORT_DIR = "reports/audit_V1_Final"
 os.makedirs(REPORT_DIR, exist_ok=True)
 os.makedirs("results/Combined", exist_ok=True)
