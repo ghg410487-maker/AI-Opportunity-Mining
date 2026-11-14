@@ -75,6 +75,12 @@ def _pick(frame: pd.DataFrame, *names: str) -> pd.Series:
 
 
 def adapt_result3(frame: pd.DataFrame) -> pd.DataFrame:
+    if "来源覆盖" in frame.columns:
+        source_label = "来源覆盖"
+    elif "来源网站数" in frame.columns:
+        source_label = "来源网站数"
+    else:
+        source_label = "来源覆盖"
     table = pd.DataFrame(
         {
             "主题簇编号": _pick(frame, "主题簇编号", "cluster_id"),
@@ -82,7 +88,7 @@ def adapt_result3(frame: pd.DataFrame) -> pd.DataFrame:
             "功能类别": _pick(frame, "功能类别", "function_category"),
             "所属行业": _pick(frame, "所属行业", "industry"),
             "机会记录数": _pick(frame, "簇内机会记录数", "机会记录数"),
-            "来源覆盖": _pick(frame, "来源覆盖", "来源网站数", "来源数量"),
+            source_label: _pick(frame, "来源覆盖", "来源网站数", "来源数量"),
             "簇内记录": _pick(frame, "簇内机会记录", "簇内机会记录编号", "记录编号"),
         }
     )
@@ -299,7 +305,9 @@ def render_topics() -> None:
 
     st.dataframe(table, hide_index=True, width="stretch")
     if table["机会记录数"].sum() > 0:
-        chart = table.groupby("主题簇名称", as_index=True)["机会记录数"].sum()
+        chart = table.assign(
+            主题标签=table["主题簇编号"] + " " + table["主题簇名称"]
+        ).set_index("主题标签")["机会记录数"]
         st.bar_chart(chart, horizontal=True)
 
 
@@ -322,10 +330,12 @@ def render_ranking() -> None:
 
     st.dataframe(table, hide_index=True, width="stretch")
 
-    scored = table.dropna(subset=["机会价值分"]).head(10)
+    scored = table.dropna(subset=["机会价值分"]).head(10).assign(
+        主题标签=lambda frame: frame["主题簇编号"] + " " + frame["主题簇名称"]
+    )
     if not scored.empty:
         st.bar_chart(
-            scored.set_index("主题簇名称")["机会价值分"], horizontal=True
+            scored.set_index("主题标签")["机会价值分"], horizontal=True
         )
 
 
