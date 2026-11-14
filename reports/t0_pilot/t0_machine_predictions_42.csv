@@ -1,0 +1,43 @@
+﻿record_id,machine_t0_label,machine_evidence,machine_reason,annotator_a_label,annotator_b_label,match_a,match_b
+B10-S00001,EDUCATION_DIRECT,A GPT-4 AI Tutor Prompt for customizable personalized learning experiences.,文本明确描述了一个AI导师提示词，用于可定制的个性化学习体验，直接涉及教学/学习用途。,,,DIFF,DIFF
+B11-S00002,EDUCATION_DIRECT,全套0成本IELTS雅思资料及备考日程计划 （推荐课程视频&笔记&文档&刷题网站&作文批改+AI口语串题prompt&IELTS评分表）,原文明确提供雅思备考资料、课程视频、刷题网站、作文批改和AI口语练习prompt，属于具体的学习活动与教育产品使用语境。,,,DIFF,DIFF
+B12-S00007,EDUCATION_DIRECT,面向量子密码教学与科研的可视化仿真工具……大幅降低量子密码学习门槛……助力高校量子信息创新人才培养,原文明确说明该工具用于量子密码教学与科研实验，并指出其教育参与者（高校师生）、教育任务（学习、实验）和教育目标（人才培养），属于直接教育语境。,,,DIFF,DIFF
+B13-S00003,EDUCATION_WEAK,教师个人成果管理系统数计学院学生综合素质评价系统智慧校园管理系统实习管理系统,文本是软件项目标题合集，其中少数系统名称涉及教师、学生评价、智慧校园和实习管理，可解释为教育管理相关，但整体主要是泛技术项目列表，无法稳定确认具体教育活动。,,,DIFF,DIFF
+B14-S00007,EDUCATION_DIRECT,我构建了一套面向本科论文写作的 AI 论文质检 Agent，用于辅助完成论文结构优化、内容润色、参考文献规范化和导师意见落实。,原文明确描述面向本科论文写作的教学辅助工具，涉及学生学习任务（论文写作修改）与导师指导落实，属于教育产品使用语境。,,,DIFF,DIFF
+SUPER_part1-S00007,EDUCATION_WEAK,用于把本地文档接入辅导搜索与大模型对话流程,文本提到“辅导搜索”暗示教育用途，但主体是本地优先RAG知识库系统的技术功能说明，未明确具体教学活动或教育参与者，教育联系可解释但不稳定。,,,DIFF,DIFF
+SUPER_part14-S00102,UNKNOWN,NO_VISIBLE_CONTENT,正文为空,,,DIFF,DIFF
+B10-S00298,UNKNOWN,NO_VISIBLE_CONTENT,正文为空,,,DIFF,DIFF
+B10-S00299,UNKNOWN,NO_VISIBLE_CONTENT,正文为空,,,DIFF,DIFF
+B10-S00300,UNKNOWN,NO_VISIBLE_CONTENT,正文为空,,,DIFF,DIFF
+B10-S00301,UNKNOWN,NO_VISIBLE_CONTENT,正文为空,,,DIFF,DIFF
+B10-S00304,UNKNOWN,NO_VISIBLE_CONTENT,正文为空,,,DIFF,DIFF
+SUPER_part10-S00021,UNKNOWN,NO_VISIBLE_CONTENT,正文为空,,,DIFF,DIFF
+SUPER_part11-S00021,EDUCATION_DIRECT,通过这节课，我们将学习220个影响做题的关键单词,原文明确描述课程教学内容、词汇学习方法和背单词目标，属于直接教育活动。,,,DIFF,DIFF
+SUPER_part12-S00029,EDUCATION_DIRECT,这个视频我筹备已久，尽力涵盖了实验室安全的一些基础知识。但仍有大量内容无法全部纳入，且本视频完全不足以让任何人具备直接上手实操化学实验的能力。,原文明确涉及实验室安全基础知识教学，并说明视频不足以让观众具备实操化学实验能力，属于教育内容。,,,DIFF,DIFF
+SUPER_part13-S00030,EDUCATION_DIRECT,交一篇雅思大作文之后的大约半小时里：评分（四项分 + 依据）→ 基于原文改写 → 核对是否忠于原文 → 同一套标准复评 → 教学报告。,原文明确描述了雅思写作教学场景中的评分、改写、复评与教学报告生成等具体教育活动，属于教育产品使用语境。,,,DIFF,DIFF
+SUPER_part15-S00249,EDUCATION_DIRECT,26年教资面试 能帮助你的资料有: 《面试网课》 《结构化22页模板》 《结构化真题》 《试讲逐字稿》,原文明确涉及教师资格证面试备考资料与教学用途，属于教育产品使用语境。,,,DIFF,DIFF
+SUPER_part16-S00174,UNKNOWN,NO_VISIBLE_CONTENT,正文为空,,,DIFF,DIFF
+SUPER_part1-S00261,UNKNOWN,NO_VISIBLE_CONTENT,正文为空,,,DIFF,DIFF
+SUPER_part17-S00041,EDUCATION_DIRECT,近百位来自全国各高校的教师齐聚在北京理工大学，以学生的身份开启了为期两天的 AI 学习之旅,原文明确描述高校教师参加AI学习培训活动，涉及教育参与者（教师/学生）与教学学习活动。,,,DIFF,DIFF
+SUPER_part19-S00043,EDUCATION_DIRECT,新的一期青训营开始啦！对于这一届的笔记，我们十分期待！也希望笔记的输出能够帮忙大家更好地温习课程内容～,文本明确提到青训营课程与笔记用于温习课程内容，属于教学/学习活动语境。,,,DIFF,DIFF
+SUPER_part18-S00056,NON_EDUCATION,现代前端项目的工程化、模板化日益壮大，各种类库框架层出不穷,文本前半段是娱乐/生活随笔，后半段转向前端工程化技术话题，均不属于教育活动。,,,DIFF,DIFF
+SUPER_part20-S00084,EDUCATION_DIRECT,正式面向高中生征集论文，还为此专门设置了高中生赛道（High School Projects Track）,原文明确涉及面向高中生的学术论文征集与专门赛道设置，属于教育机构/学术会议的教育活动安排。,,,DIFF,DIFF
+SUPER_part2-S00219,EDUCATION_DIRECT,首先是通过ChatGLM模型生成课堂教学方案,原文明确提到使用ChatGLM模型生成课堂教学方案，涉及教学设计与教育任务，属于直接教育应用语境。,,,DIFF,DIFF
+B14-S00044,EDUCATION_DIRECT,护理学院举办“AI辅助英文科学论文写作与发表”百家论坛,原文明确涉及护理学院举办学术论坛，属于教育机构组织的教学/学术活动，且主题为AI辅助论文写作，具有明确教育语境。,,,DIFF,DIFF
+B11-S00088,EDUCATION_DIRECT,学前教育教研室开展集体备课活动（二）,原文明确涉及学前教育教研室的集体备课活动，属于教育机构的教学准备与教研活动。,,,DIFF,DIFF
+B12-S00085,EDUCATION_DIRECT,华中科技大学：实验室管理如何打通校院两级,原文明确涉及高校实验室管理这一教育管理活动，可识别教育机构（华中科技大学）及教育管理任务。,,,DIFF,DIFF
+B13-S00234,EDUCATION_DIRECT,AI 虚拟标准化病人病史采集教学系统采购项目中标结果公告,原文明确涉及教学系统采购，属于教育产品使用与教育机构采购行动，可确认具体教育活动。,,,DIFF,DIFF
+B14-S00053,EDUCATION_DIRECT,图书馆馆员人工智能素养提升培训第六场顺利举办 ——利用科研文献大模型辅助学术论文写作,原文明确描述了面向图书馆馆员的人工智能素养提升培训活动，属于成人学习/职业教育范畴，并涉及学术论文写作教学。,,,DIFF,DIFF
+B11-S00089,EDUCATION_DIRECT,教学工作-AI进课堂，教师先“备课” 驻校工程师团队学习AI教学新指引 安徽信息工程学院,原文明确涉及高校教学工作中教师备课与AI教学指引学习，属于教育管理/教学实践语境。,,,DIFF,DIFF
+B12-S00093,EDUCATION_WEAK,虚拟仿真实验平台建设指南：嵌入式、AI与物联网实训室整体方案,标题提及实验平台与实训室方案，具有教育实践联系，但仅为标题/宣传性内容，无法确认具体教学活动，故为WEAK。,,,DIFF,DIFF
+B13-S00092,EDUCATION_WEAK,西安、宝鸡、榆林等地中小学集中预采！教育信息化全覆盖,标题提及中小学和教育信息化采购，但正文仅为标题和专栏来源，缺乏具体教育活动或采购内容细节，无法稳定确认具体教育实践。,,,DIFF,DIFF
+B11-S00123,EDUCATION_WEAK,AI教育产品怎么选？4款学校方案重点考察名单与试点要点,标题提及AI教育产品与学校方案，但仅有标题和来源，无正文可确认具体教学活动，属可解释但不确定的教育联系。,,,DIFF,DIFF
+B12-S00100,EDUCATION_DIRECT,2026年度“人工智能+“虚拟仿真实验教学项目申报16问16答,标题明确指向虚拟仿真实验教学项目的申报问答，涉及教育实践与教育管理评价活动。,,,DIFF,DIFF
+B13-S00097,EDUCATION_WEAK,智慧教室,标题提及智慧教室这一教育场景，但整体是ICT大单集中释放的供给宣传，无法稳定确认具体教育活动。,,,DIFF,DIFF
+B14-S00073,EDUCATION_WEAK,2026年学术论文写作的AI工具横评：四款主流“学术AI写作助手”深度测评,标题涉及学术写作AI工具测评，与学习写作有可解释联系，但仅为标题，无法确认具体教育活动或教学用途。,,,DIFF,DIFF
+SUPER_part7-S00124,EDUCATION_WEAK,托福拼分所有学校都认吗？MyBest Scores 和单次成绩到底该看哪个,标题涉及托福考试分数政策，属教育考试话题，但仅为新闻标题，无具体教学活动或教育机构行动描述，无法稳定确认具体教育活动。,,,DIFF,DIFF
+B11-S00141,EDUCATION_WEAK,平板电脑性能推荐榜 教育工作者从备课到家访全程便携生产力工具,标题提及教育工作者备课家访等教育场景，但正文仅为产品推荐榜，无法稳定确认具体教育活动，属泛供给宣传。,,,DIFF,DIFF
+B13-S00124,EDUCATION_WEAK,大屏追剧学习平板怎么选？联想小新 Pro13 课程与剧集各得其位,标题提及学习平板和课程，但正文仅为产品导购标题，无法确认具体教学活动，属于泛产品宣传。,,,DIFF,DIFF
+B12-S00320,NON_EDUCATION,气密性检测仪：实验室与工厂生产线产品质量的无损保障,该文本是工业检测设备的产品宣传标题，主题为工厂生产线质量控制，不涉及教学活动或教育语境。,,,DIFF,DIFF
+B14-S00200,EDUCATION_WEAK,大屏文献阅读平板怎么选？大学生论文季的真实需求告诉你,标题提及大学生论文阅读场景，有可解释的教育联系，但正文仅为导购标题，无法确认具体教育活动。,,,DIFF,DIFF
+B11-S00143,EDUCATION_WEAK,聚焦AI+教育智变！2026未来教育论坛圆满落幕，洞察报告重磅发布,标题提及AI+教育论坛，但仅有新闻标题，无法确认具体教育活动或教学实践，属于可解释的教育联系但证据不足。,,,DIFF,DIFF

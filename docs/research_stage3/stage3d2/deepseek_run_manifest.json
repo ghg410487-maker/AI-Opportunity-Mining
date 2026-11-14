@@ -1,0 +1,16 @@
+{
+    "provider": "DeepSeek",
+    "endpoint": "https://api.deepseek.com/v1/chat/completions",
+    "exact_model_id": "deepseek-chat",
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "max_tokens": 4096,
+    "seed": "unsupported",
+    "response_format": "json_object",
+    "historical_log_status": "NOT_RECOVERABLE",
+    "historical_log_note": "42条T0试跑时的原始HTTP请求与响应未完整落盘，无法恢复具体Request ID。",
+    "prompt_version": "T0_draft_v0.2",
+    "prompt_sha256": "NOT_RECOVERABLE",
+    "historical_run_status": "历史 42 条跑批的原始 Prompt 已彻底丢失，无法恢复。",
+    "configuration_purpose": "本文件为后续测试的配置模板，不得宣称历史42条使用了相同参数。"
+}

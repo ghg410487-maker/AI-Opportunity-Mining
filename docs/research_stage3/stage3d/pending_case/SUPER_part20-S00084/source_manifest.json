@@ -1,0 +1,10 @@
+{
+    "record_id": "SUPER_part20-S00084",
+    "original_url_in_csv": "https://juejin.cn/post/7419887372462686249",
+    "actual_access_url": "https://juejin.cn/post/7419887372462686249",
+    "access_time": "2026-11-13 14:02:33",
+    "access_method": "Python requests + BeautifulSoup (Target Article Tag)",
+    "page_title": "我用豆包，生成了 AI 版《红楼梦》MV",
+    "sha256": "5bd4f6d5b03aa3cfd7bb0bd8c8ae54189617efd87e02390adf267afa6c3c8cd7",
+    "is_fulltext_recoverable": true
+}
