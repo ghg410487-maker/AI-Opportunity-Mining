@@ -1,0 +1,27 @@
+{
+  "delivery_id": "stage3e3_guo_remaining84_v1",
+  "locked_set_unchanged": true,
+  "original_blind_126": {
+    "path": "experiments\\datasets\\stage3e3\\locked_evaluation_126_guo_blind.csv",
+    "rows": 126,
+    "sha256": "0fcfd16443fe85c77462f909b80626885631c6b83caf0e30d95ea0702234bbe6"
+  },
+  "private_mapping_with_42": {
+    "path": "experiments\\datasets\\stage3e3\\locked_evaluation_126_with_guo42_private.csv",
+    "verified": 42,
+    "pending": 84,
+    "sha256": "bce8a347ad1a4f2c77ed67fda8c47e2437575c90a69b0ba3881206c5a55c7d87"
+  },
+  "controlled_delivery_remaining84": {
+    "path": "experiments\\datasets\\stage3e3\\locked_evaluation_remaining84_guo_blind.csv",
+    "rows": 84,
+    "sha256": "d2d1982cb48fdded8e414b752b1b12155b19427561d9653d3ec58886aa1804d9"
+  },
+  "privacy": "All three files contain third-party text and are gitignored; do not push to public GitHub.",
+  "forbidden_columns_absent": true,
+  "q_length_proxy_distribution": {
+    "Q3": 31,
+    "Q1": 3,
+    "Q2": 8
+  }
+}
