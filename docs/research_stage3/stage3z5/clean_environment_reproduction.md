@@ -46,10 +46,13 @@ python -m venv .venv
 | 页面行为 | Playwright 访问主题/排行/策划案 | C004 提示、人工分层、下载按钮均存在；无绝对路径 |
 | 缺 result3 | 临时移走 `result3.csv`，切到主题页 | 无异常，显示“待算法端输出”与 Mock 标注 |
 | 缺 result4 | 临时移走 `result4.csv`，切到排行页 | 无异常，显示“待算法端输出”与 Mock 标注 |
+| 最终提交复跑 | 干净目录 `git fetch` + `reset --hard b22600d` 后重跑 | pytest 35 passed；启动 HTTP 200 |
+
+最终提交 `b22600d` 已在同一干净目录重新同步并复跑，日志见 `logs/07_clean_final_commit.log`。`b22600d` 相对 `cd53379` 只增加数据根回退、文档与 manifest 同步，不改变主数据路径行为。
 
 ## 4. 路径依赖核查
 
-- 不依赖个人用户名：页面文本检查未出现 `C:\Users/*`、`86136`、`/home/*`。
+- 不依赖个人用户名：页面文本检查未出现 `C:\Users/*`、本机用户名、`/home/*`。
 - 不依赖固定盘符：`app.py` 先使用 `BASE_DIR/results`，不存在时回退到 `BASE_DIR.parent/results`，同时兼容 `results/final/*` 与官方 `results/result*.csv`。
 - 不依赖 Codex/IDE 缓存：干净目录不含 `.codeartsdoer/`、`.venv/`、`__pycache__/`。
 - 受控数据缺失时：主数据缺失显示“当前没有可用记录”，result3/4 缺失显示提示 + Mock 标注，不崩溃。
