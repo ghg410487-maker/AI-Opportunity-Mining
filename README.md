@@ -125,23 +125,69 @@ AI-Opportunity-Mining/
 
 详细排期与验收标准见 `docs/sprint_execution_plan.md`；官方要求映射见 `docs/competition_compliance.md`；AI 使用记录模板见 `docs/AI_usage_log.md`。
 
-## 环境与启动状态
+## 环境准备、数据下载与系统启动
 
-- Windows 11
-- Python 3.12.0
-- Git 2.55.0
-- VS Code / Codex
+### 1. 环境准备
 
-当前没有可运行的业务代码，因此暂不提供虚假的安装或启动命令。实现首个可运行流水线后再补充依赖安装、配置、启动、测试和部署步骤。
+- Python 3.11+（当前验证版本 3.12）
+- 建议使用虚拟环境：
+
+```bash
+python -m venv .venv
+# Windows
+.venv\Scripts\python -m pip install -r requirements.txt
+# Linux / macOS
+.venv/bin/python -m pip install -r requirements.txt
+```
+
+依赖清单见 `requirements.txt`：`streamlit`、`pandas`、`requests`、`beautifulsoup4`、`pytest`。
+
+不要提交 `.env`。如需本地密钥，复制 `.env.example` 为 `.env` 后填写；`.env` 已被 `.gitignore` 忽略。
+
+### 2. 数据下载与准备
+
+- 官方主数据放到 `results/final/result1_Final_All.csv`（当前 1984 条）；
+- 算法结果放到 `results/final/result3.csv`、`results/final/result4.csv`；
+- 机会判别中间产物为 `results/final/result2_resolved_subset.csv` 与 `results/final/result2_export_blockers.csv`；
+- `data/`、`results/`、`experiments/datasets/` 默认不提交，请从团队数据渠道获取；
+- 数据缺失时页面会显示缺失提示或 Mock 占位，不会崩溃；
+- 重新生成算法结果：
+
+```bash
+python -m edumine competition-mvp --input results/final/result1_Final_All.csv --output results/final
+```
+
+### 3. 系统启动
+
+```bat
+run_system.bat
+```
+
+```bash
+bash run_system.sh
+# 或直接运行
+streamlit run app.py
+```
+
+浏览器访问 <http://localhost:8501>。首次启动时脚本会在依赖缺失时自动安装。演示步骤见 `docs/demo_guide.md`。
+
+数据校验：
+
+```bash
+python scripts/validate_csv.py          # 预览模式：REVIEW 未决时部分通过，EXIT=0
+python scripts/validate_csv.py --strict # 严格正式提交模式：当前预期 NOT_READY，EXIT=1
+```
+
+当前 result2 仍有 595 条 REVIEW，严格模式会明确阻断正式提交。
 
 ## 当前进度
 
 - [x] 核验官方赛题 PDF、附件1、附件2及四份 CSV 模板
 - [x] 建立项目目录和核心规划文档
-- [ ] 实现 Task 1 数据采集、治理与 `result1.csv`
-- [ ] 实现 Task 2 全量机会判别与 `result2.csv`
-- [ ] 实现 Task 3 聚类、评估、溯源与 `result3.csv`
-- [ ] 实现 Task 4 可解释评分与 `result4.csv`
-- [ ] 实现 Task 5 决策支持、策划案和系统展示
-- [ ] 完成实验、部署说明、论文与匿名提交检查
+- [x] 实现 Task 1 数据采集、治理与 `result1.csv`
+- [x] 实现 Task 2 机会判别（v1：42 机会 / 595 REVIEW 待审批）
+- [x] 实现 Task 3 聚类、评估、溯源与 `result3.csv`
+- [x] 实现 Task 4 可解释评分与 `result4.csv`
+- [x] 实现 Task 5 决策支持、策划案和系统展示（实验候选版）
+- [ ] 完成 REVIEW 政策审批、全量 result2 重算与正式提交
 
