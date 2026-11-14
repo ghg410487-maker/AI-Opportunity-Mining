@@ -6,6 +6,7 @@ result2 采用“已决子集 + REVIEW 阻断表”的形态；存在 REVIEW 时
 
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -61,13 +62,17 @@ def split_ids(value: str) -> list[str]:
     return [item.strip() for item in str(value).split(";") if item.strip()]
 
 
-def validate_official_csvs() -> int:
+def validate_official_csvs(strict: bool = False) -> int:
     print("=== 官方四份 CSV 核对 ===")
     print(f"目录：{RESULTS_DIR}")
+    print(f"模式：{'严格正式提交模式（--strict）' if strict else '预览模式'}")
 
     errors: list[str] = []
     warnings: list[str] = []
     statuses: list[str] = []
+    all_files_present = True
+    reconciled = False
+    review_block_present = False
 
     def passed(message: str) -> None:
         print(f"✅ {message}")
@@ -83,13 +88,21 @@ def validate_official_csvs() -> int:
     result1_path = RESULTS_DIR / RESULT1_FILE
     if not result1_path.exists():
         failed(f"缺少 result1：{result1_path}")
-        print("校验结果：失败（result1 缺失，无法继续）")
+        if strict:
+            print("NOT_READY")
+            print("严格模式阻断原因：result1 缺失")
+        else:
+            print("校验结果：失败（result1 缺失，无法继续）")
         return 1
 
     result1 = read_csv(result1_path)
     if "记录编号" not in result1.columns:
         failed("result1 缺少字段：记录编号")
-        print("校验结果：失败")
+        if strict:
+            print("NOT_READY")
+            print("严格模式阻断原因：result1 缺少记录编号")
+        else:
+            print("校验结果：失败")
         return 1
 
     result1_ids = clean_ids(result1["记录编号"])
@@ -127,6 +140,7 @@ def validate_official_csvs() -> int:
                 )
             passed(f"result2 已决子集 {len(resolved)} 条，记录编号唯一，状态仅 0/1")
     else:
+        all_files_present = False
         warning(f"缺少 result2 已决子集：{resolved_path}")
 
     if blockers_path.exists():
@@ -145,6 +159,7 @@ def validate_official_csvs() -> int:
                     failed(f"result2 阻断表出现非 REVIEW 状态：{', '.join(invalid)}")
             passed(f"result2 REVIEW 阻断表 {len(blockers)} 条，记录编号唯一")
     else:
+        all_files_present = False
         warning(f"缺少 result2 阻断表：{blockers_path}")
 
     if resolved is None and blockers is None:
@@ -168,11 +183,13 @@ def validate_official_csvs() -> int:
                 + ", ".join(extra_in_result2[:10])
             )
         if not missing_from_result2 and not extra_in_result2:
+            reconciled = combined == result1_id_set and not overlap
             passed(
                 f"result2 与 result1 对账一致："
                 f"{len(resolved_ids)} 已决 + {len(blocker_ids)} REVIEW = {len(result1_ids)}"
             )
 
+        review_block_present = bool(blocker_ids)
         if blocker_ids:
             statuses.append(
                 f"result2：部分通过（已决 {len(resolved_ids)} 条，"
@@ -187,6 +204,7 @@ def validate_official_csvs() -> int:
     result3: pd.DataFrame | None = None
     result3_path = RESULTS_DIR / RESULT3_FILE
     if not result3_path.exists():
+        all_files_present = False
         warning(f"缺少 result3：{result3_path}")
     else:
         result3 = read_csv(result3_path)
@@ -241,6 +259,7 @@ def validate_official_csvs() -> int:
 
     result4_path = RESULTS_DIR / RESULT4_FILE
     if not result4_path.exists():
+        all_files_present = False
         warning(f"缺少 result4：{result4_path}")
     else:
         result4 = read_csv(result4_path)
@@ -282,6 +301,24 @@ def validate_official_csvs() -> int:
     print("\n=== 校验摘要 ===")
     for status in statuses:
         print(f"• {status}")
+
+    if strict:
+        blockers: list[str] = []
+        if errors:
+            blockers.append(f"{len(errors)} 项硬错误")
+        if review_block_present:
+            blockers.append(f"result2 仍有 {len(blocker_ids)} 条 REVIEW 未决")
+        if not reconciled:
+            blockers.append("result2 未与 result1 100% 对账")
+        if not all_files_present:
+            blockers.append("四份 CSV 未齐全")
+        if blockers:
+            print("NOT_READY")
+            print("严格模式阻断原因：" + "；".join(blockers))
+            return 1
+        print("READY_FOR_SUBMISSION")
+        return 0
+
     partial = any(
         ("部分通过" in status) or ("待 REVIEW" in status) for status in statuses
     )
@@ -298,5 +335,16 @@ def validate_official_csvs() -> int:
     return 0
 
 
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="官方四份 CSV 核对")
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="严格正式提交模式：存在 REVIEW、对账不一致或文件缺失时输出 NOT_READY 并返回非零退出码",
+    )
+    args = parser.parse_args(argv)
+    return validate_official_csvs(strict=args.strict)
+
+
 if __name__ == "__main__":
-    sys.exit(validate_official_csvs())
+    sys.exit(main())
