@@ -32,6 +32,7 @@ data/cleaned/**
 data/processed/**
 results/**
 experiments/datasets/**
+experiments/stage3e4/**
 *.parquet
 *.jsonl
 *.db

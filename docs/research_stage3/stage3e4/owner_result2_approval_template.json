@@ -1,0 +1,10 @@
+{
+  "approval_version": "stage3e4_result2_policy_pending_v1",
+  "approval_status": "PENDING_APPROVAL",
+  "selected_policy": "",
+  "approved_by": "",
+  "approved_at": "",
+  "confidence_semantics_approved": false,
+  "record_decisions": [],
+  "notes": "No REVIEW is mapped until owner approval; decisions must be record-specific and auditable."
+}
