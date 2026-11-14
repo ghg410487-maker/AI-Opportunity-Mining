@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -33,6 +34,7 @@ RESULT3_REQUIRED = ("主题簇编号", "主题簇名称")
 RESULT4_REQUIRED = ("主题簇编号", "主题簇名称", "机会价值分")
 
 AUDIT_CSV = BASE_DIR / "experiments" / "stage3e3" / "cluster5_guo_initial_audit.csv"
+HUMAN_METRICS_PATH = BASE_DIR / "results" / "final" / "human_metrics.json"
 PAUSED_CLUSTER_FALLBACK = ("T3-C004",)
 
 MOCK_NOTE = (
@@ -53,8 +55,15 @@ def load_dataset(csv_path: str) -> dict:
         "sources": list(distribution.index),
         "error": loader.load_error,
         "missing": list(loader.missing_columns),
-        "path": str(loader.csv_path),
+        "path": _relative_path(loader.csv_path),
     }
+
+
+def _relative_path(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(BASE_DIR.resolve()).as_posix()
+    except ValueError:
+        return path.name
 
 
 def _find_result(
@@ -64,9 +73,12 @@ def _find_result(
     for candidate in candidates:
         if candidate.exists():
             frame, error = load_optional_csv(candidate, required_columns)
+            display = _relative_path(candidate)
             if frame is not None:
-                return frame, None, str(candidate)
-            return None, error, str(candidate)
+                return frame, None, display
+            if error:
+                error = error.replace(str(BASE_DIR), ".")
+            return None, error, display
     return None, "算法端尚未产出结果文件", ""
 
 
@@ -123,6 +135,64 @@ def render_paused_notice(removed: list[str]) -> None:
     st.caption(
         f"{labels} 簇因人工核验全否，已在推荐视图中暂停展示（保留机器实验历史）"
     )
+
+
+@st.cache_data(show_spinner=False, ttl=60)
+def load_human_audit(path: str) -> pd.DataFrame:
+    return pd.read_csv(
+        path, encoding="utf-8-sig", dtype=str, keep_default_na=False
+    )
+
+
+def render_human_review_layer() -> None:
+    st.subheader("🧾 人工审核分层（旁路，不改写机器聚类）")
+    if not AUDIT_CSV.exists():
+        st.caption("未找到人工审计文件，暂不展示人工分层。")
+        return
+    frame = load_human_audit(str(AUDIT_CSV))
+    table = frame.rename(
+        columns={
+            "cluster_id": "主题簇编号",
+            "machine_topic_name": "机器主题名称",
+            "machine_record_count": "机器记录数",
+            "human_confirmed_1": "人工确认",
+            "human_rejected_0": "人工否定",
+            "human_insufficient": "证据不足",
+            "confirmed_support_status": "人工支持状态",
+            "owner_decision_status": "负责人裁决",
+        }
+    )
+    columns = [
+        name
+        for name in (
+            "主题簇编号",
+            "机器主题名称",
+            "机器记录数",
+            "人工确认",
+            "人工否定",
+            "证据不足",
+            "人工支持状态",
+            "负责人裁决",
+        )
+        if name in table.columns
+    ]
+    st.dataframe(table[columns], hide_index=True, width="stretch")
+    st.caption(
+        "机器预测、人工初审、证据不足和负责人裁决分层展示；"
+        "C003、C004 不进入“已确认高价值推荐”。机器五簇结果仅作为算法实验展示。"
+    )
+    if HUMAN_METRICS_PATH.exists():
+        try:
+            metrics = json.loads(HUMAN_METRICS_PATH.read_text(encoding="utf-8"))
+            st.json(metrics)
+            st.caption("指标基于分层抽样，不代表全库准确率。")
+        except (json.JSONDecodeError, OSError):
+            st.caption("人工指标文件存在但无法解析，暂不展示数字。")
+    else:
+        st.caption(
+            "加权 Precision / Recall / F1、REVIEW 比例、证据不足率："
+            "等待负责人提供真实评估文件后启用，当前不展示数字。"
+        )
 
 
 def _pick(frame: pd.DataFrame, *names: str) -> pd.Series:
@@ -373,9 +443,16 @@ def render_topics() -> None:
         ).set_index("主题标签")["机会记录数"]
         st.bar_chart(chart, horizontal=True)
 
+    if not is_mock:
+        render_human_review_layer()
+
 
 def render_ranking() -> None:
     st.header("🏆 机会价值综合排行")
+    st.caption(
+        "C003、C004 人工支持不足，当前排行仅作为机器实验视图展示，"
+        "不进入“已确认高价值推荐”。"
+    )
 
     frame, error, path = _find_result(RESULT4_CANDIDATES, RESULT4_REQUIRED)
     is_mock = frame is None

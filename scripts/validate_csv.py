@@ -62,9 +62,12 @@ def split_ids(value: str) -> list[str]:
     return [item.strip() for item in str(value).split(";") if item.strip()]
 
 
-def validate_official_csvs(strict: bool = False) -> int:
+def validate_official_csvs(
+    strict: bool = False, results_dir: str | Path | None = None
+) -> int:
+    results_path = Path(results_dir) if results_dir else RESULTS_DIR
     print("=== 官方四份 CSV 核对 ===")
-    print(f"目录：{RESULTS_DIR}")
+    print(f"目录：{results_path}")
     print(f"模式：{'严格正式提交模式（--strict）' if strict else '预览模式'}")
 
     errors: list[str] = []
@@ -85,7 +88,9 @@ def validate_official_csvs(strict: bool = False) -> int:
         errors.append(message)
         print(f"❌ {message}")
 
-    result1_path = RESULTS_DIR / RESULT1_FILE
+    result1_path = results_path / RESULT1_FILE
+    if not result1_path.exists() and (results_path / "result1.csv").exists():
+        result1_path = results_path / "result1.csv"
     if not result1_path.exists():
         failed(f"缺少 result1：{result1_path}")
         if strict:
@@ -115,10 +120,40 @@ def validate_official_csvs(strict: bool = False) -> int:
 
     resolved: pd.DataFrame | None = None
     blockers: pd.DataFrame | None = None
-    resolved_path = RESULTS_DIR / RESULT2_RESOLVED_FILE
-    blockers_path = RESULTS_DIR / RESULT2_BLOCKERS_FILE
+    resolved_path = results_path / RESULT2_RESOLVED_FILE
+    blockers_path = results_path / RESULT2_BLOCKERS_FILE
     resolved_ids: set[str] = set()
     blocker_ids: set[str] = set()
+
+    full_result2_path = results_path / "result2.csv"
+    full_result2 = None
+    if (
+        not resolved_path.exists()
+        and not blockers_path.exists()
+        and full_result2_path.exists()
+    ):
+        full_result2 = read_csv(full_result2_path)
+        missing = sorted(RESULT2_COLUMNS - set(full_result2.columns))
+        if missing:
+            failed(f"result2.csv 缺少字段：{', '.join(missing)}")
+        else:
+            resolved = full_result2
+            resolved_ids = set(clean_ids(full_result2["记录编号"]))
+            if len(resolved_ids) != len(full_result2):
+                failed("result2.csv 记录编号不唯一")
+            invalid_values = sorted(
+                set(clean_ids(full_result2["是否构成机会"])) - {"0", "1"}
+            )
+            if invalid_values:
+                failed(
+                    "result2.csv 出现非 0/1 状态："
+                    + ", ".join(invalid_values)
+                    + "（REVIEW 不得映射为 0 或 1）"
+                )
+            passed(
+                f"result2.csv 全量文件 {len(full_result2)} 条，"
+                "记录编号唯一，状态仅 0/1"
+            )
 
     if resolved_path.exists():
         resolved = read_csv(resolved_path)
@@ -139,7 +174,7 @@ def validate_official_csvs(strict: bool = False) -> int:
                     + "（REVIEW 不得映射为 0 或 1）"
                 )
             passed(f"result2 已决子集 {len(resolved)} 条，记录编号唯一，状态仅 0/1")
-    else:
+    elif full_result2 is None:
         all_files_present = False
         warning(f"缺少 result2 已决子集：{resolved_path}")
 
@@ -158,7 +193,7 @@ def validate_official_csvs(strict: bool = False) -> int:
                 if invalid:
                     failed(f"result2 阻断表出现非 REVIEW 状态：{', '.join(invalid)}")
             passed(f"result2 REVIEW 阻断表 {len(blockers)} 条，记录编号唯一")
-    else:
+    elif full_result2 is None:
         all_files_present = False
         warning(f"缺少 result2 阻断表：{blockers_path}")
 
@@ -197,12 +232,16 @@ def validate_official_csvs(strict: bool = False) -> int:
                 "REVIEW 保持阻断，禁止正式全量导出"
             )
         elif resolved is not None and len(resolved_ids) == len(result1_ids):
-            statuses.append("result2：完全通过")
+            statuses.append(
+                "result2：全量正式文件通过"
+                if full_result2 is not None
+                else "result2：完全通过"
+            )
         else:
             statuses.append("result2：待补充已决记录")
 
     result3: pd.DataFrame | None = None
-    result3_path = RESULTS_DIR / RESULT3_FILE
+    result3_path = results_path / RESULT3_FILE
     if not result3_path.exists():
         all_files_present = False
         warning(f"缺少 result3：{result3_path}")
@@ -257,7 +296,7 @@ def validate_official_csvs(strict: bool = False) -> int:
                         f"result2 {len(opportunity_ids)} 条"
                     )
 
-    result4_path = RESULTS_DIR / RESULT4_FILE
+    result4_path = results_path / RESULT4_FILE
     if not result4_path.exists():
         all_files_present = False
         warning(f"缺少 result4：{result4_path}")
@@ -338,12 +377,17 @@ def validate_official_csvs(strict: bool = False) -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="官方四份 CSV 核对")
     parser.add_argument(
+        "--results-dir",
+        default=None,
+        help="待校验的四份 CSV 目录，默认 results/final",
+    )
+    parser.add_argument(
         "--strict",
         action="store_true",
         help="严格正式提交模式：存在 REVIEW、对账不一致或文件缺失时输出 NOT_READY 并返回非零退出码",
     )
     args = parser.parse_args(argv)
-    return validate_official_csvs(strict=args.strict)
+    return validate_official_csvs(strict=args.strict, results_dir=args.results_dir)
 
 
 if __name__ == "__main__":

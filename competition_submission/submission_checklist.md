@@ -1,74 +1,79 @@
-# 官方提交包核对清单（v1 占位包）
+# 官方提交包核对清单
 
-- 包状态：**SHELL / NOT_READY**（等待 result2 REVIEW 政策批准后重算）
-- 数据口径：**v1 实验数据**（42 机会 / 595 REVIEW）
-- 生成日期：2026-11-14
-- 来源分支：`integration/stage3e4`
+- 包版本：`v1-experimental`
+- 总体状态：**NOT_READY**
+- `submission_ready`：`False`
+- 生成时间：2026-11-14T16:42:43
 
-## 1. 包内文件
+## 1. 阻断项
 
-| 文件 | 行数（不含表头） | 来源 | SHA256 |
+- result2.csv 数据行数为 0（占位文件）
+- 严格校验未通过
+
+## 2. 官方材料核对
+
+| 材料 | 状态 | 说明 |
+|---|---|---|
+| 四份官方 CSV | NOT_READY | 见 `results/` 与 manifest |
+| 源代码 | PASS | `source/` 最小可运行源码 |
+| 运行环境说明 | PASS | `docs/environment_and_deployment.md` |
+| 系统部署说明 | PASS | 本地运行，公网入口待负责人批准 |
+| 系统关键截图 | PASS | `screenshots/` 4 张 |
+| AI 使用说明 | PARTIAL | `docs/AI_usage_log.md` 为记录模板，实际记录待团队补填 |
+| 论文 Word/PDF | MISSING | 本包未包含论文，需团队另行提交 |
+| 附件1标签映射文件 | 待核实 | 官方附件1标签需在最终算法配置中核对 |
+| 其他官方材料 | 待核实 | 以赛题 PDF 最终清单为准 |
+
+## 3. 文件清单
+
+| 相对路径 | 大小 | SHA256 前缀 | 状态 |
 |---|---:|---|---|
-| `result1.csv` | 1984 | `results/final/result1_Final_All.csv` | `44c75335b3795c746ffc603b339bf6aa4d2e6945e38ebd0a8bcb9d39c9ff0a52` |
-| `result2.csv` | 0（仅表头占位） | 官方表头，待 REVIEW 审批后重算 | `93a4de6be0d7476bbfac8a31636b22eadf29004832acc067e52e0cf6fc764947` |
-| `result3.csv` | 5 | `results/final/result3.csv`（列名已对齐官方模板，`来源覆盖`=独立来源数） | `4f0b1a76aeff54960b86fe91e25b07d1b788bb32e86acf5319762cd38e32e6bc` |
-| `result4.csv` | 5 | `results/final/result4.csv` | `c12d86443e3267ee3b01fbc7aef577c65a0248f1a62930dd42cfea04aef3da45` |
+| `docs/AI_usage_log.md` | 2923 | `461abf1f2cdb9155…` | READY |
+| `docs/demo_guide.md` | 3385 | `a3cdd744144d171c…` | READY |
+| `docs/environment_and_deployment.md` | 930 | `f452d8427d3090c2…` | READY |
+| `docs/official_result_switch_contract.md` | 675 | `83582f1f8af32bf5…` | READY |
+| `README.md` | 2196 | `08bc4ad74ad3411b…` | READY |
+| `results/result1.csv` | 1084788 | `44c75335b3795c74…` | READY |
+| `results/result2.csv` | 94 | `93a4de6be0d7476b…` | NOT_READY |
+| `results/result3.csv` | 1043 | `8142e768deb7bfd4…` | READY |
+| `results/result4.csv` | 443 | `c12d86443e3267ee…` | READY |
+| `screenshots/overview.png` | 166780 | `2895b8e949716921…` | READY |
+| `screenshots/plan.png` | 123302 | `cfa303802ab9285a…` | READY |
+| `screenshots/ranking.png` | 168126 | `6a0f4442eb4470b1…` | READY |
+| `screenshots/topics.png` | 254298 | `bbc9d32ed6b6400b…` | READY |
+| `source/app.py` | 22947 | `0b3cab053f21a1a7…` | READY |
+| `source/config/official_headers.py` | 1073 | `0733ed3e0a426968…` | READY |
+| `source/edumine/__init__.py` | 95 | `7055e6acb3374660…` | READY |
+| `source/edumine/__main__.py` | 51 | `482b8693e2fe6dbd…` | READY |
+| `source/edumine/baselines.py` | 5843 | `b04703796bfcca04…` | READY |
+| `source/edumine/cli.py` | 3064 | `5ef66578e579834a…` | READY |
+| `source/edumine/competition.py` | 17027 | `6b1510381d816a53…` | READY |
+| `source/edumine/core.py` | 23290 | `e61cb01c433a213e…` | READY |
+| `source/edumine/normalization.py` | 14829 | `e50aa1d0b9eb9a0b…` | READY |
+| `source/edumine/stage3e2.py` | 5663 | `d6b5bc3f0272b70d…` | READY |
+| `source/edumine/stage3e3.py` | 2856 | `fb109692e525b938…` | READY |
+| `source/requirements.txt` | 79 | `fa7517dcc1612d09…` | READY |
+| `source/run_system.bat` | 491 | `819d500ce1bd2ef6…` | READY |
+| `source/run_system.sh` | 492 | `cc47aefbfe86ec31…` | READY |
+| `source/scripts/switch_official_results.py` | 13410 | `2bbd75492737772a…` | READY |
+| `source/scripts/validate_csv.py` | 15405 | `cca31cd0b00e3af0…` | READY |
+| `source/src/data_loader.py` | 9024 | `e86d1d60327c7a27…` | READY |
+| `submission_checklist.md` | 3944 | `3e5eebb45305f773…` | READY |
 
-## 2. result2 状态说明
-
-`result2.csv` **只有官方表头，没有数据行**，原因：
-
-- v1 当前有 **595 条 REVIEW** 未决，另有 1389 条已决记录；
-- REVIEW 表示政策未定，**禁止映射为 0 或 1**；
-- 官方 result2 要求同一批次全量记录，因此在政策批准前不能生成合规全量 result2；
-- 已决子集与阻断表保留在 `results/final/result2_resolved_subset.csv`、`results/final/result2_export_blockers.csv`，供审批和重算使用。
-
-## 3. v1 / v2 隔离声明
-
-- 本提交包仅使用 v1 数据：**42 机会 / 595 REVIEW / 5 个主题簇**；
-- **未混入**负责人 v2 结果：**16 机会 / 601 REVIEW**；
-- v2 材料仅存在于 `docs/research_stage3/stage3e3/` 与 `experiments/stage3e3/`；
-- 最终政策批准后，统一重算 result2 / result3 / result4，再替换本包文件。
-
-## 4. C004 说明
-
-- `result3.csv`、`result4.csv` 保留 C004 机器实验历史；
-- Web 系统推荐视图已暂停展示 C004（人工核验 0/5 确认）；
-- 提交包中的机器结果不做人工篡改，审批时需同时查看 `experiments/stage3e3/cluster5_guo_initial_audit.csv`。
-
-## 5. 校验命令与预期
+## 4. 正式发布闸门
 
 ```bash
-# 预览模式：允许 REVIEW，部分通过，EXIT=0
-python scripts/validate_csv.py
-
-# 严格正式提交模式：当前预期 NOT_READY + EXIT=1
-python scripts/validate_csv.py --strict
+python scripts/build_submission.py --release
+python scripts/validate_csv.py --strict --results-dir competition_submission/results
+python scripts/security_gate.py --target competition_submission
 ```
 
-当前严格模式阻断原因：`result2 仍有 595 条 REVIEW 未决`。在 REVIEW 清零并完成 100% 对账前，不得把本包标记为正式提交版。
+release 模式在 result2 仍为占位、或严格校验未通过时必须返回非零退出码。
 
-## 6. 打包排除项
+## 5. 排除项
 
-以下内容不得进入提交包或压缩包：
-
-- `.env`、`.env.*`（已移除真实密钥，仅保留 `.env.example`）
-- `.venv/`、`venv/`、`__pycache__/`、`.pytest_cache/`、`*.pyc`
-- `cloudflared.exe`（约 55 MB 本地工具）
-- `*.zip`（B08/B10 审计包等本地材料）
-- `.codeartsdoer/`、`.workbuddy/`、`.wbapp_*.genie`
-- `data/`、`results/` 中间产物（`competition_submission/` 除外）
-- `experiments/datasets/` 私有评测数据
-
-## 7. 提交前核对
-
-- [x] 四份 CSV 文件名与官方一致
-- [x] result1/result3/result4 来自 v1 真实产物
-- [x] result2 保留官方表头，未伪造 REVIEW 映射
-- [x] 包内无 `.env`、无密钥、无缓存目录
-- [x] v1/v2 数量口径已在清单中声明
-- [x] 已知悉当前为 `NOT_READY`，等待 REVIEW 政策批准
-- [ ] 负责人批准 REVIEW 处置政策
-- [ ] 重算全量 result2 并替换占位文件
-- [ ] 重跑 `python scripts/validate_csv.py --strict` 得到 `READY_FOR_SUBMISSION`
-- [ ] 更新 SHA256 与本清单状态为 `READY`
+- `.env`、`.env.*`、密钥、SSH 私钥
+- `.venv/`、`__pycache__/`、`.pytest_cache/`
+- `data/`、`results/` 中间产物、`experiments/datasets/`
+- 私有盲审文件、受控人工审核原件
+- 本地大文件（`cloudflared.exe`、审计 zip）

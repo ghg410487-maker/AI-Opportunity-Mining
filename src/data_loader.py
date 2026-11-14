@@ -34,6 +34,13 @@ DEFAULT_CSV_PATH = PROJECT_ROOT / "results" / "final" / "result1_Final_All.csv"
 ENCODINGS = ("utf-8-sig", "utf-8", "gb18030")
 
 
+def _display_path(path: str | os.PathLike) -> str:
+    try:
+        return Path(path).resolve().relative_to(PROJECT_ROOT).as_posix()
+    except ValueError:
+        return Path(path).name
+
+
 def _read_csv_robust(path: str | os.PathLike) -> pd.DataFrame:
     last_error: Exception | None = None
     for encoding in ENCODINGS:
@@ -101,11 +108,11 @@ def load_optional_csv(
     """读取可选结果表，返回 (DataFrame, 错误信息)。文件缺失或为空时不抛异常。"""
     path = Path(csv_path)
     if not path.exists():
-        return None, f"未找到文件：{path}"
+        return None, f"未找到文件：{_display_path(path)}"
     try:
         df = _read_csv_robust(path)
     except Exception as exc:
-        return None, f"读取失败：{path}（{exc}）"
+        return None, f"读取失败：{_display_path(path)}（{exc}）"
     if df.empty:
         return None, f"文件为空：{path}"
     if required_columns:
@@ -134,12 +141,12 @@ class DataLoader:
 
     def _load(self) -> pd.DataFrame:
         if not self.csv_path.exists():
-            self.load_error = f"数据文件不存在：{self.csv_path}"
+            self.load_error = f"数据文件不存在：{_display_path(self.csv_path)}"
             return pd.DataFrame()
         try:
             df = _read_csv_robust(self.csv_path)
         except Exception as exc:
-            self.load_error = f"读取数据文件失败：{self.csv_path}（{exc}）"
+            self.load_error = f"读取数据文件失败：{_display_path(self.csv_path)}（{exc}）"
             return pd.DataFrame()
         self.missing_columns = [
             column for column in REQUIRED_COLUMNS if column not in df.columns
