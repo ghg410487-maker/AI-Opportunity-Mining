@@ -1,26 +1,4 @@
-<<<<<<< HEAD
-# Python# Python
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-.env
-
-# 数据与结果（不要传到 GitHub）
-data/
-results/
-experiments/datasets/
-
-# IDE
-.vscode/
-.idea/
-
-# 系统
-.DS_Store
-Thumbs.db
-
-# 日志
-*.log
+# Python
 __pycache__/
 *.py[cod]
 *.pyd
@@ -29,6 +7,7 @@ __pycache__/
 .ruff_cache/
 .coverage
 htmlcov/
+*.log
 .venv/
 venv/
 
@@ -41,19 +20,17 @@ venv/
 *credentials*.json
 *secret*.json
 
-# IDE and OS
+# IDE and operating system
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
 
-# Raw, intermediate, and generated data
-data/raw/**
-data/normalized/**
-data/cleaned/**
-data/processed/**
+# Raw, intermediate, generated, and restricted data
+data/**
 results/**
 experiments/datasets/**
+outputs/**
 *.parquet
 *.jsonl
 *.db
@@ -69,17 +46,19 @@ experiments/datasets/**
 competition_materials/
 official_materials/
 
-# Keep directory placeholders
-!data/raw/.gitkeep
-!data/normalized/.gitkeep
-!data/cleaned/.gitkeep
-!data/processed/.gitkeep
-!results/.gitkeep
+# JavaScript dependencies and caches
+node_modules/
+.npm/
+.yarn/
 
-=======
-.venv/
-__pycache__/
-*.pyc
-data/
-results/
->>>>>>> 38ccfeb (feat: Task1 完全体，成功采集多源 127 条数据)
+# Keep approved directory placeholders only
+!data/raw/
+!data/raw/.gitkeep
+!data/normalized/
+!data/normalized/.gitkeep
+!data/cleaned/
+!data/cleaned/.gitkeep
+!data/processed/
+!data/processed/.gitkeep
+!results/
+!results/.gitkeep
