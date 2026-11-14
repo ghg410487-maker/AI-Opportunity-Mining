@@ -1,0 +1,23 @@
+{
+  "official_headers_expected": [
+    "采集批次号",
+    "记录编号",
+    "是否构成机会",
+    "机会置信度",
+    "功能类别",
+    "所属行业"
+  ],
+  "resolved_subset_header_exact": true,
+  "resolved_subset_rows": 1389,
+  "full_input_rows": 1984,
+  "full_coverage": false,
+  "legal_opportunity_values": [
+    "0",
+    "1"
+  ],
+  "function_values_valid": true,
+  "industry_values_valid": true,
+  "review_mapping": "BLOCK_EXPORT",
+  "full_official_result2_ready": false,
+  "blocker_count": 595
+}

@@ -1,0 +1,11 @@
+{
+  "example_type": "SYNTHETIC_DEMO_ONLY",
+  "not_real_experiment_result": true,
+  "采集批次号": "MOCK-BATCH",
+  "记录编号": "MOCK-S00001",
+  "来源网站名称": "合成演示来源",
+  "来源链接": "https://example.invalid/synthetic-record",
+  "内容": "合成示例：某教师希望减少重复整理练习反馈的时间，演示系统拟提供辅助归类功能。",
+  "采集时间": "2026-11-14T00:00:00+08:00",
+  "热度指标（点赞数、评论数、收藏数、转发量等）": "{}"
+}

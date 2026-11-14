@@ -1,0 +1,190 @@
+{
+  "evaluation_scope": "40 owner-adjudicated development/calibration cases; NOT an unbiased final test set",
+  "class_distribution": {
+    "EDUCATION_DIRECT": 32,
+    "EDUCATION_WEAK": 5,
+    "NON_EDUCATION": 3
+  },
+  "rule": {
+    "n": 40,
+    "accuracy": 0.675,
+    "macro_f1": 0.2869458128078818,
+    "per_class": {
+      "EDUCATION_DIRECT": {
+        "support": 32,
+        "precision": 0.9615384615384616,
+        "recall": 0.78125,
+        "f1": 0.8620689655172413
+      },
+      "EDUCATION_WEAK": {
+        "support": 5,
+        "precision": 0.2222222222222222,
+        "recall": 0.4,
+        "f1": 0.2857142857142857
+      },
+      "NON_EDUCATION": {
+        "support": 3,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "UNKNOWN": {
+        "support": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    "confusion_matrix": {
+      "EDUCATION_DIRECT": {
+        "EDUCATION_DIRECT": 25,
+        "EDUCATION_WEAK": 5,
+        "NON_EDUCATION": 2,
+        "UNKNOWN": 0
+      },
+      "EDUCATION_WEAK": {
+        "EDUCATION_DIRECT": 0,
+        "EDUCATION_WEAK": 2,
+        "NON_EDUCATION": 3,
+        "UNKNOWN": 0
+      },
+      "NON_EDUCATION": {
+        "EDUCATION_DIRECT": 1,
+        "EDUCATION_WEAK": 2,
+        "NON_EDUCATION": 0,
+        "UNKNOWN": 0
+      },
+      "UNKNOWN": {
+        "EDUCATION_DIRECT": 0,
+        "EDUCATION_WEAK": 0,
+        "NON_EDUCATION": 0,
+        "UNKNOWN": 0
+      }
+    }
+  },
+  "tfidf_logistic_regression_3fold": {
+    "n": 40,
+    "accuracy": 0.8,
+    "macro_f1": 0.22222222222222224,
+    "per_class": {
+      "EDUCATION_DIRECT": {
+        "support": 32,
+        "precision": 0.8,
+        "recall": 1.0,
+        "f1": 0.888888888888889
+      },
+      "EDUCATION_WEAK": {
+        "support": 5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "NON_EDUCATION": {
+        "support": 3,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "UNKNOWN": {
+        "support": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    "confusion_matrix": {
+      "EDUCATION_DIRECT": {
+        "EDUCATION_DIRECT": 32,
+        "EDUCATION_WEAK": 0,
+        "NON_EDUCATION": 0,
+        "UNKNOWN": 0
+      },
+      "EDUCATION_WEAK": {
+        "EDUCATION_DIRECT": 5,
+        "EDUCATION_WEAK": 0,
+        "NON_EDUCATION": 0,
+        "UNKNOWN": 0
+      },
+      "NON_EDUCATION": {
+        "EDUCATION_DIRECT": 3,
+        "EDUCATION_WEAK": 0,
+        "NON_EDUCATION": 0,
+        "UNKNOWN": 0
+      },
+      "UNKNOWN": {
+        "EDUCATION_DIRECT": 0,
+        "EDUCATION_WEAK": 0,
+        "NON_EDUCATION": 0,
+        "UNKNOWN": 0
+      }
+    }
+  },
+  "tfidf_linear_svm_3fold": {
+    "n": 40,
+    "accuracy": 0.775,
+    "macro_f1": 0.2246376811594203,
+    "per_class": {
+      "EDUCATION_DIRECT": {
+        "support": 32,
+        "precision": 0.8378378378378378,
+        "recall": 0.96875,
+        "f1": 0.8985507246376812
+      },
+      "EDUCATION_WEAK": {
+        "support": 5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "NON_EDUCATION": {
+        "support": 3,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "UNKNOWN": {
+        "support": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    "confusion_matrix": {
+      "EDUCATION_DIRECT": {
+        "EDUCATION_DIRECT": 31,
+        "EDUCATION_WEAK": 1,
+        "NON_EDUCATION": 0,
+        "UNKNOWN": 0
+      },
+      "EDUCATION_WEAK": {
+        "EDUCATION_DIRECT": 4,
+        "EDUCATION_WEAK": 0,
+        "NON_EDUCATION": 1,
+        "UNKNOWN": 0
+      },
+      "NON_EDUCATION": {
+        "EDUCATION_DIRECT": 2,
+        "EDUCATION_WEAK": 1,
+        "NON_EDUCATION": 0,
+        "UNKNOWN": 0
+      },
+      "UNKNOWN": {
+        "EDUCATION_DIRECT": 0,
+        "EDUCATION_WEAK": 0,
+        "NON_EDUCATION": 0,
+        "UNKNOWN": 0
+      }
+    }
+  },
+  "label_set": [
+    "EDUCATION_DIRECT",
+    "EDUCATION_WEAK",
+    "NON_EDUCATION",
+    "UNKNOWN"
+  ],
+  "limitations": [
+    "All 40 cases participated in guideline calibration or adjudication.",
+    "UNKNOWN has zero support; its per-class metrics are descriptive zeros.",
+    "Small and imbalanced data; metrics are baseline diagnostics only."
+  ]
+}

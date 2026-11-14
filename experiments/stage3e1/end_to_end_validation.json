@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "checks": {
+    "task2_rows_1984": true,
+    "task2_unique": true,
+    "extractions_1984": true,
+    "unified_1984": true,
+    "status_domain": true,
+    "resolved_plus_blockers": true,
+    "resolved_header": true,
+    "resolved_domain": true,
+    "function_domain": true,
+    "industry_domain": true,
+    "clusters_only_opportunities": true,
+    "result3_header": true,
+    "result4_header": true,
+    "result3_result4_clusters": true,
+    "review_never_in_resolved": true
+  },
+  "status_distribution": {
+    "REVIEW": 595,
+    "1": 42,
+    "0": 1347
+  },
+  "t0_distribution": {
+    "EDUCATION_DIRECT": 943,
+    "NON_EDUCATION": 315,
+    "EDUCATION_WEAK": 445,
+    "UNKNOWN": 281
+  },
+  "rows": {
+    "task2": 1984,
+    "resolved": 1389,
+    "blockers": 595,
+    "result3": 5,
+    "result4": 5
+  }
+}

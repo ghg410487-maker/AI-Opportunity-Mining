@@ -1,0 +1,29 @@
+{
+  "example_type": "SYNTHETIC_DEMO_ONLY",
+  "not_for_official_csv": true,
+  "schema_version": "competition_mvp_v1",
+  "record": {
+    "batch_id": "MOCK-BATCH",
+    "record_id": "MOCK-S00001",
+    "source_name": "合成演示来源",
+    "source_url": "https://example.invalid/synthetic-record"
+  },
+  "task2": {
+    "t0_label": "EDUCATION_DIRECT",
+    "dimensions": {
+      "education_relevance": 2,
+      "problem_clarity": 1,
+      "demand_authenticity": 1,
+      "ai_core": 0,
+      "feasibility": 1,
+      "unmet_degree": 1
+    },
+    "status": "REVIEW",
+    "confidence": 0.55,
+    "function_category": "",
+    "industry": ""
+  },
+  "task3": null,
+  "task4": null,
+  "task5": null
+}
