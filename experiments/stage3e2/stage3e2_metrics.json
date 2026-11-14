@@ -1,0 +1,107 @@
+{
+  "input_rows": 1984,
+  "input_sha256": "44c75335b3795c746ffc603b339bf6aa4d2e6945e38ebd0a8bcb9d39c9ff0a52",
+  "baseline_status": {
+    "REVIEW": 595,
+    "1": 42,
+    "0": 1347
+  },
+  "v2_status": {
+    "REVIEW": 601,
+    "0": 1367,
+    "1": 16
+  },
+  "transitions": {
+    "REVIEW->REVIEW": 562,
+    "1->REVIEW": 30,
+    "0->0": 1338,
+    "REVIEW->0": 29,
+    "0->REVIEW": 9,
+    "1->1": 12,
+    "REVIEW->1": 4
+  },
+  "review_blockers": {
+    "education_relevance": 0,
+    "problem_clarity": 166,
+    "demand_authenticity": 544,
+    "ai_core": 49,
+    "feasibility": 15,
+    "unmet_degree": 508
+  },
+  "review_primary_causes": {
+    "TRUE_INDETERMINATE": 139,
+    "DEMAND_EVIDENCE_MISSING": 237,
+    "TEXT_INSUFFICIENT": 177,
+    "AI_CORE_UNCLEAR": 32,
+    "PROBLEM_UNCLEAR": 10
+  },
+  "review_evidence_levels": {
+    "SHORT_CONTENT": 194,
+    "TITLE_LIKE": 246,
+    "SUBSTANTIVE_CONTENT": 155
+  },
+  "review_sources": {
+    "GitHub": 156,
+    "哔哩哔哩": 152,
+    "教育官方新闻": 90,
+    "掘金": 94,
+    "教育论坛": 99,
+    "采购与产品": 4
+  },
+  "guo_candidates": 42,
+  "guo_pending": 42,
+  "cluster_k_sweep": [
+    {
+      "k": 2,
+      "silhouette_proxy": 0.003054,
+      "seed_stability_rand_index": 0.498258,
+      "min_cluster_size": 11,
+      "single_source_clusters": 0
+    },
+    {
+      "k": 3,
+      "silhouette_proxy": 0.004695,
+      "seed_stability_rand_index": 0.531552,
+      "min_cluster_size": 9,
+      "single_source_clusters": 0
+    },
+    {
+      "k": 4,
+      "silhouette_proxy": 0.003476,
+      "seed_stability_rand_index": 0.648471,
+      "min_cluster_size": 7,
+      "single_source_clusters": 1
+    },
+    {
+      "k": 5,
+      "silhouette_proxy": 0.00717,
+      "seed_stability_rand_index": 0.6988,
+      "min_cluster_size": 5,
+      "single_source_clusters": 1
+    },
+    {
+      "k": 6,
+      "silhouette_proxy": 0.020986,
+      "seed_stability_rand_index": 0.742935,
+      "min_cluster_size": 5,
+      "single_source_clusters": 1
+    },
+    {
+      "k": 7,
+      "silhouette_proxy": 0.017522,
+      "seed_stability_rand_index": 0.784746,
+      "min_cluster_size": 3,
+      "single_source_clusters": 2
+    },
+    {
+      "k": 8,
+      "silhouette_proxy": 0.009647,
+      "seed_stability_rand_index": 0.811847,
+      "min_cluster_size": 3,
+      "single_source_clusters": 2
+    }
+  ],
+  "paid_api_calls": 0,
+  "human_review_results_available": false,
+  "human_review_note": "郭独立核验尚未提交；不得将算法状态变化解释为准确率变化。"
+}

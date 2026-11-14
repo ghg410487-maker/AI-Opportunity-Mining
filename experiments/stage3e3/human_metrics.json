@@ -1,0 +1,9 @@
+{
+  "evaluation_set_id": "stage3e3_locked_126_v1",
+  "rows": 126,
+  "complete": false,
+  "metrics_status": "PENDING_HUMAN_REVIEW",
+  "completed_rows": 0,
+  "required_rows": 126,
+  "warning": "42 opportunity records alone support only v1 candidate precision audit; weighted overall metrics require all probability-sampled strata."
+}

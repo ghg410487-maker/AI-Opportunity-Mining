@@ -1,0 +1,22 @@
+{
+  "evaluation_set_id": "stage3e3_locked_126_v1",
+  "rows": 126,
+  "opportunity_census": 42,
+  "nonop_probability_sample": 42,
+  "review_probability_sample": 42,
+  "completed_human_labels": 0,
+  "metrics_status": "PENDING_HUMAN_REVIEW",
+  "reportable_now": [
+    "sampling design",
+    "prediction distributions",
+    "runtime/cost"
+  ],
+  "not_reportable_now": [
+    "Precision",
+    "Recall",
+    "Macro-F1",
+    "opportunity precision"
+  ],
+  "recall_condition": "Only after all probability-sampled strata are labeled and weighted estimates are used.",
+  "paid_api_calls": 0
+}

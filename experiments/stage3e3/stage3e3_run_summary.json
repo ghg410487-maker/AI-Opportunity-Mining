@@ -1,0 +1,55 @@
+{
+  "frozen_input_sha256": "44c75335b3795c746ffc603b339bf6aa4d2e6945e38ebd0a8bcb9d39c9ff0a52",
+  "evaluation": {
+    "evaluation_set_id": "stage3e3_locked_126_v1",
+    "rows": 126,
+    "opportunity_census": 42,
+    "nonop_probability_sample": 42,
+    "review_probability_sample": 42,
+    "completed_human_labels": 0,
+    "metrics_status": "PENDING_HUMAN_REVIEW",
+    "reportable_now": [
+      "sampling design",
+      "prediction distributions",
+      "runtime/cost"
+    ],
+    "not_reportable_now": [
+      "Precision",
+      "Recall",
+      "Macro-F1",
+      "opportunity precision"
+    ],
+    "recall_condition": "Only after all probability-sampled strata are labeled and weighted estimates are used.",
+    "paid_api_calls": 0
+  },
+  "review601_categories": {
+    "SUPPLEMENT_SOURCE_PRIORITY": 439,
+    "DEMAND_AND_UNMET_MISSING": 100,
+    "REUSABLE_EXCLUSION_CANDIDATE_SUPPLY_ONLY": 31,
+    "REUSABLE_EXCLUSION_CANDIDATE_GENERIC_QUESTION": 3,
+    "BOUNDARY_MANUAL_REVIEW": 12,
+    "AI_CORE_UNCLEAR": 16
+  },
+  "task2_compute_benchmark": {
+    "v1": {
+      "runs": 3,
+      "records_per_run": 1984,
+      "median_seconds": 0.028149,
+      "records_per_second": 70483.08,
+      "paid_api_calls": 0
+    },
+    "v2": {
+      "runs": 3,
+      "records_per_run": 1984,
+      "median_seconds": 0.133766,
+      "records_per_second": 14831.88,
+      "paid_api_calls": 0
+    }
+  },
+  "cluster_experiments": 40,
+  "scoring_rows": 90,
+  "official_full_result2_ready": false,
+  "official_blocker_count": 601,
+  "private_evaluation_path": "experiments\\datasets\\stage3e3\\locked_evaluation_126_private.csv",
+  "paid_api_calls": 0
+}

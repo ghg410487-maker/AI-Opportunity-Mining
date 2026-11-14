@@ -1,0 +1,42 @@
+{
+  "config_id": "stage3e3_algorithm_freeze_candidate_v1",
+  "freeze_target_date": "2026-11-17",
+  "task2": {
+    "production": "task2_rule_v1",
+    "candidate": "task2_rule_v2_candidate",
+    "promotion_gate": "locked_126 human review + owner approval",
+    "internal_states": [
+      "1",
+      "0",
+      "REVIEW"
+    ],
+    "official_mapping": {
+      "1": "1",
+      "0": "0",
+      "REVIEW": "BLOCK_EXPORT"
+    }
+  },
+  "task3": {
+    "production": "char_tfidf_kmeans_k5",
+    "comparison": "hybrid_char_domain_terms_k3_to_k6",
+    "promotion_gate": "human theme consistency review"
+  },
+  "task4": {
+    "production": "five_dimension_weighted_v1",
+    "weights": {
+      "source_diversity": 0.25,
+      "scale": 0.2,
+      "demand": 0.2,
+      "unmet": 0.2,
+      "feasibility": 0.15
+    },
+    "audit_candidate": "evidence_constraint_lambda_0.5",
+    "promotion_gate": "owner weight approval"
+  },
+  "interface": {
+    "stable": "competition_mvp_v1",
+    "additive_candidate": "competition_mvp_v1.1",
+    "zhao_action": "No breaking change; candidate fields feature-flagged"
+  },
+  "paid_api_calls": 0
+}

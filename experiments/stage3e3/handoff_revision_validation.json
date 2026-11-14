@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "checks": {
+    "guo42_rows": true,
+    "guo42_unique": true,
+    "human_12_29_1": true,
+    "v2_12_30_0": true,
+    "reasons_complete": true,
+    "evidence_quality_missing_preserved": true,
+    "merged_126": true,
+    "merged_human_42": true,
+    "merged_pending_84": true,
+    "guo_source_sha_preserved": true
+  },
+  "overall_metrics_status": "PENDING_REMAINING_84",
+  "official_result2_status": "BLOCKED_601"
+}
