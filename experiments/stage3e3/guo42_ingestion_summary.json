@@ -1,0 +1,42 @@
+{
+  "source_path": "E:\\xwechat_files\\wxid_r4to3bbty1yu22_ff68\\msg\\file\\2026-11\\guo_stage3e1_opp42_submit_20261114.csv",
+  "private_copy": "experiments\\datasets\\stage3e3\\guo_stage3e1_opp42_submit_20261114.csv",
+  "source_sha256": "b5ec97ae970885b90f8239d71b6ae52dd615ac05467645460a170d095036a914",
+  "rows": 42,
+  "unique_record_ids": 42,
+  "human_distribution": {
+    "1": 12,
+    "0": 29,
+    "INSUFFICIENT": 1
+  },
+  "empty_reasons": 0,
+  "empty_evidence_quality": 42,
+  "review_status": {
+    "VERIFIED": 42
+  },
+  "v2_distribution": {
+    "REVIEW": 30,
+    "1": 12
+  },
+  "v2_human_cross": {
+    "1|REVIEW": 8,
+    "0|REVIEW": 21,
+    "0|1": 8,
+    "1|1": 4,
+    "INSUFFICIENT|REVIEW": 1
+  },
+  "v1_candidate_confirmation_determinate": 0.2926829268292683,
+  "v1_candidate_confirmation_all42_lower_bound": 0.2857142857142857,
+  "v2_retained_human_opportunities": 4,
+  "v2_human_opportunities_total": 12,
+  "v2_opportunity_retention_rate": 0.3333333333333333,
+  "v2_positive_precision_on_this_audit": 0.3333333333333333,
+  "error_types": {
+    "PASS": 12,
+    "D2=FAIL": 5,
+    "D3=FAIL": 18,
+    "D1=FAIL": 6,
+    "缺失": 1
+  },
+  "scope_warning": "该42条均由v1预测为1，只支持候选精确率审计，不支持全量Accuracy/Recall/Macro-F1。"
+}

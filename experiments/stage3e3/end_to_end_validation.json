@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "checks": {
+    "evaluation_126": true,
+    "evaluation_unique": true,
+    "sampling_42_each": true,
+    "human_pending": true,
+    "blind_no_predictions": true,
+    "blind_ids_match": true,
+    "public_no_raw": true,
+    "review_601": true,
+    "review_no_final_labels": true,
+    "cluster_runs_40": true,
+    "cluster_domains": true,
+    "score_rows_90": true,
+    "config_exists": true,
+    "frozen_sha": true,
+    "paid_api_calls_zero": true
+  },
+  "official_full_result2_ready": false,
+  "official_blockers": 601,
+  "human_metrics_status": "PENDING_HUMAN_REVIEW"
+}

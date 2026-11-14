@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "checks": {
+    "v1_1984": true,
+    "v1_1_1984": true,
+    "task2_v2_1984": true,
+    "unique_v2": true,
+    "additive_contract": true,
+    "schema_v1_1": true,
+    "root_rows_595": true,
+    "guo_42": true,
+    "guo_all_pending": true,
+    "resolved_plus_blocked": true,
+    "official_domain": true,
+    "official_one_fields": true,
+    "review_not_exported": true
+  },
+  "v2_status": {
+    "REVIEW": 601,
+    "0": 1367,
+    "1": 16
+  },
+  "resolved_rows": 1383,
+  "blocked_rows": 601,
+  "paid_api_calls": 0
+}
