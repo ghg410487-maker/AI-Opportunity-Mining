@@ -296,6 +296,7 @@ def render_topics() -> None:
         table = mock_result3()
         st.caption("⚠️ [Mock 数据测试]")
     else:
+        st.warning("⚠️ 【实验候选版本】当前展示的聚类与评分基于算法的早期结果（v1）。由于 result2 的最终政策尚未确定，本页面数据仅用于展示算法能力，非正式提交版。")
         st.success(f"已加载算法端真实结果：{path}")
         table = adapt_result3(frame)
 
@@ -325,6 +326,7 @@ def render_ranking() -> None:
         table = mock_result4()
         st.caption("⚠️ [Mock 数据测试]")
     else:
+        st.warning("⚠️ 【实验候选版本】当前展示的聚类与评分基于算法的早期结果（v1）。由于 result2 的最终政策尚未确定，本页面数据仅用于展示算法能力，非正式提交版。")
         st.success(f"已加载算法端真实结果：{path}")
         table = adapt_result4(frame)
 
@@ -341,6 +343,7 @@ def render_ranking() -> None:
 
 def render_plan() -> None:
     st.header("📄 机会策划案")
+    st.warning("⚠️ 【实验候选版本】当前展示的聚类与评分基于算法的早期结果（v1）。由于 result2 的最终政策尚未确定，本页面数据仅用于展示算法能力，非正式提交版。")
 
     frame, error, path = _find_result(RESULT4_CANDIDATES, RESULT4_REQUIRED)
     if frame is None:
