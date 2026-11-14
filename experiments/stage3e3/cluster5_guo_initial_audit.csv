@@ -1,0 +1,6 @@
+﻿cluster_id,machine_topic_name,machine_record_count,human_confirmed_1,human_rejected_0,human_insufficient,confirmed_support_status,duplicate_machine_name_flag,owner_decision_status,note
+T3-C001,学生-文本生成机会,7,4,3,0,HAS_INITIAL_CONFIRMED_SUPPORT,YES,PENDING,旁路人工审计；不修改机器聚类或评分
+T3-C002,学生-文本生成机会,14,3,11,0,HAS_INITIAL_CONFIRMED_SUPPORT,YES,PENDING,旁路人工审计；不修改机器聚类或评分
+T3-C003,学生-语义分析机会,7,1,6,0,HAS_INITIAL_CONFIRMED_SUPPORT,NO,PENDING,旁路人工审计；不修改机器聚类或评分
+T3-C004,教师-智能体编排机会,5,0,5,0,NO_CONFIRMED_SUPPORT_PAUSE_RECOMMENDATION,NO,PENDING,旁路人工审计；不修改机器聚类或评分
+T3-C005,学生-文本生成机会,9,4,4,1,HAS_INITIAL_CONFIRMED_SUPPORT,YES,PENDING,旁路人工审计；不修改机器聚类或评分

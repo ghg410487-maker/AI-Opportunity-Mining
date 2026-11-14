@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "checks": {
+    "blind126_unique": true,
+    "mapped42_84": true,
+    "remaining84_unique": true,
+    "no_completed_reissued": true,
+    "same_locked_subset": true,
+    "blind_no_leakage": true,
+    "q_proxy_31_8_3": true,
+    "q_formal_blank": true,
+    "cluster_counts": true,
+    "c004_paused": true
+  }
+}
