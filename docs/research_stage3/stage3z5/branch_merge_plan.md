@@ -2,7 +2,7 @@
 
 - 日期：2026-11-14
 - 当前分支：`integration/stage3e4`
-- 最新工程提交：`cd53379`（本报告提交前）
+- 最新工程提交：`b22600d`
 - 远程状态：`git fetch origin` **失败**（`github.com:443` 经本地代理不可达）
 
 ## 1. 分支状态
@@ -11,14 +11,14 @@
 |---|---|---|---|
 | `origin/dev` | 远程缓存 | `bab6db8` | 算法负责人分支，含 v1.1 接口与聚类评分实验 |
 | `origin/main` | 远程缓存 | `d73ac6d` | 前端与工程集成基线 |
-| `integration/stage3e4` | 本地 | `cd53379` | 工程集成、校验、切换、提交包 |
+| `integration/stage3e4` | 本地 | `b22600d` | 工程集成、校验、切换、提交包 |
 
 ## 2. 祖先关系
 
 ```text
 bab6db8 (origin/dev)
    └── d73ac6d (origin/main)
-          └── cd53379 (integration/stage3e4)
+          └── b22600d (integration/stage3e4)
 ```
 
 - `git merge-base origin/dev integration/stage3e4` = `bab6db8`（dev 是集成分支祖先）

@@ -97,7 +97,7 @@
 
 **当前无真实冲突。**
 
-- `origin/dev@bab6db8` → `origin/main@d73ac6d` → `integration/stage3e4@cd53379` 为线性包含；
+- `origin/dev@bab6db8` → `origin/main@d73ac6d` → `integration/stage3e4@b22600d` 为线性包含；
 - `git merge-tree` 无冲突标记；输出中的 `ON CONFLICT` 是 SQL 文本；
 - 但远程不可达，合并前必须重新 fetch，防止 dev 已前进。
 - 证据：`branch_merge_plan.md`。

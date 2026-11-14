@@ -3,7 +3,7 @@
   "version": "v1-experimental",
   "algorithm_version": "v1-rule-baseline",
   "algorithm_config_version": "competition-mvp-v1",
-  "generated_at": "2026-11-14T16:48:18",
+  "generated_at": "2026-11-14T16:50:50",
   "overall_status": "NOT_READY",
   "submission_ready": false,
   "blockers": [
@@ -296,7 +296,7 @@
     {
       "path": "submission_checklist.md",
       "size": 3944,
-      "sha256": "36245e31b1bee73bae0dddcb68fec8754cc378229b20dd4705bf290f41249f80",
+      "sha256": "6806b39d9594edf781e5679aaeb910d78cc335279c46d596a90701f54a0a01f8",
       "purpose": "包说明",
       "version": "v1-experimental",
       "formal": true,
