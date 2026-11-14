@@ -32,6 +32,9 @@ RESULT4_CANDIDATES = (
 RESULT3_REQUIRED = ("主题簇编号", "主题簇名称")
 RESULT4_REQUIRED = ("主题簇编号", "主题簇名称", "机会价值分")
 
+AUDIT_CSV = BASE_DIR / "experiments" / "stage3e3" / "cluster5_guo_initial_audit.csv"
+PAUSED_CLUSTER_FALLBACK = ("T3-C004",)
+
 MOCK_NOTE = (
     "【Mock 数据测试】当前为演示数据，非算法端真实结果，"
     "禁止用于正式导出、验收或对外汇报。"
@@ -67,11 +70,67 @@ def _find_result(
     return None, "算法端尚未产出结果文件", ""
 
 
+@st.cache_data(show_spinner=False, ttl=60)
+def load_paused_clusters(audit_path: str) -> list[str]:
+    fallback = list(PAUSED_CLUSTER_FALLBACK)
+    path = Path(audit_path)
+    if not path.exists():
+        return fallback
+    try:
+        frame = pd.read_csv(
+            path, encoding="utf-8-sig", dtype=str, keep_default_na=False
+        )
+    except Exception:
+        return fallback
+    required = {"cluster_id", "human_confirmed_1", "human_rejected_0"}
+    if not required.issubset(frame.columns):
+        return fallback
+    confirmed = pd.to_numeric(frame["human_confirmed_1"], errors="coerce").fillna(0)
+    rejected = pd.to_numeric(frame["human_rejected_0"], errors="coerce").fillna(0)
+    paused = frame.loc[(confirmed == 0) & (rejected > 0), "cluster_id"].tolist()
+    paused.extend(fallback)
+    return sorted({item for item in paused if item})
+
+
+def pause_rejected_clusters(
+    table: pd.DataFrame, paused: list[str]
+) -> tuple[pd.DataFrame, list[str]]:
+    if table.empty or not paused:
+        return table, []
+    ids = table["主题簇编号"].astype(str)
+    matched: list[str] = []
+    for cluster_id in ids:
+        for item in paused:
+            short = item.replace("T3-", "")
+            if (
+                cluster_id == item
+                or cluster_id.endswith(item)
+                or cluster_id.endswith(short)
+            ):
+                matched.append(cluster_id)
+                break
+    if not matched:
+        return table, []
+    kept = table.loc[~ids.isin(matched)].reset_index(drop=True)
+    removed = list(dict.fromkeys(item.replace("T3-", "") for item in matched))
+    return kept, removed
+
+
+def render_paused_notice(removed: list[str]) -> None:
+    if not removed:
+        return
+    labels = "、".join(removed)
+    st.caption(
+        f"{labels} 簇因人工核验全否，已在推荐视图中暂停展示（保留机器实验历史）"
+    )
+
+
 def _pick(frame: pd.DataFrame, *names: str) -> pd.Series:
     for name in names:
         if name in frame.columns:
             return frame[name].astype(str)
     return pd.Series("", index=frame.index, dtype="object")
+
 
 
 def adapt_result3(frame: pd.DataFrame) -> pd.DataFrame:
@@ -298,7 +357,10 @@ def render_topics() -> None:
     else:
         st.warning("⚠️ 【实验候选版本】当前展示的聚类与评分基于算法的早期结果（v1）。由于 result2 的最终政策尚未确定，本页面数据仅用于展示算法能力，非正式提交版。")
         st.success(f"已加载算法端真实结果：{path}")
-        table = adapt_result3(frame)
+        table, removed = pause_rejected_clusters(
+            adapt_result3(frame), load_paused_clusters(str(AUDIT_CSV))
+        )
+        render_paused_notice(removed)
 
     metric_col1, metric_col2 = st.columns(2)
     metric_col1.metric("主题簇数量", f"{len(table)}")
@@ -328,7 +390,12 @@ def render_ranking() -> None:
     else:
         st.warning("⚠️ 【实验候选版本】当前展示的聚类与评分基于算法的早期结果（v1）。由于 result2 的最终政策尚未确定，本页面数据仅用于展示算法能力，非正式提交版。")
         st.success(f"已加载算法端真实结果：{path}")
-        table = adapt_result4(frame)
+        table, removed = pause_rejected_clusters(
+            adapt_result4(frame), load_paused_clusters(str(AUDIT_CSV))
+        )
+        if removed:
+            table["排名"] = range(1, len(table) + 1)
+        render_paused_notice(removed)
 
     st.dataframe(table, hide_index=True, width="stretch")
 
@@ -354,24 +421,30 @@ def render_plan() -> None:
         table = mock_result4()
         st.caption("⚠️ [Mock 数据测试]")
     else:
-        table = adapt_result4(frame)
+        table, removed = pause_rejected_clusters(
+            adapt_result4(frame), load_paused_clusters(str(AUDIT_CSV))
+        )
         st.caption(f"数据来源：{path}")
+        render_paused_notice(removed)
 
-    topics = [name for name in table["主题簇名称"].tolist() if name]
-    if not topics:
-        st.info("暂无可选主题。")
+    topic_rows = table[table["主题簇名称"].astype(str).str.strip().ne("")]
+    if topic_rows.empty:
+        st.info("暂无可展示主题。")
         return
 
-    selected = st.selectbox("选择目标主题", topics)
-    matched = table[table["主题簇名称"] == selected]
+    options = [
+        f"{item['主题簇编号']} {item['主题簇名称']}"
+        for _, item in topic_rows.iterrows()
+    ]
+    selected = st.selectbox("选择目标主题", options)
+    cluster_id = selected.split(" ", 1)[0]
+    matched = table[table["主题簇编号"] == cluster_id]
     if matched.empty:
         st.info("未找到该主题的明细。")
         return
     row = matched.iloc[0]
 
-    if st.button("生成 Markdown 策划案"):
-        st.markdown(
-            f"""
+    plan_markdown = f"""
 ### 1. 目标用户与痛点
 - 主题：{row['主题簇名称']}（{row['主题簇编号']}）
 - 功能类别：{row['功能类别'] or '待核'}
@@ -388,8 +461,18 @@ def render_plan() -> None:
 
 > 依据：{path or 'Mock 数据'}。{'本策划案为 Mock 占位内容，不可用于正式汇报。' if frame is None else ''}
 """
-        )
+
+    if st.button("生成 Markdown 策划案"):
+        st.markdown(plan_markdown)
         st.success("策划案生成完毕。")
+
+    st.download_button(
+        label="⬇️ 下载 Markdown 文件",
+        data=plan_markdown.encode("utf-8"),
+        file_name=f"plan_{cluster_id}.md",
+        mime="text/markdown",
+        key="plan_download",
+    )
 
 
 def render_sidebar() -> str:
