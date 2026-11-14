@@ -33,6 +33,7 @@ data/processed/**
 results/**
 experiments/datasets/**
 experiments/stage3e4/**
+experiments/stage3e5/**
 *.parquet
 *.jsonl
 *.db
