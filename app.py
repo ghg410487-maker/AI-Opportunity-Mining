@@ -19,22 +19,40 @@ st.set_page_config(
     layout="wide",
 )
 
-DATA_CSV = BASE_DIR / "results" / "final" / "result1_Final_All.csv"
+DATA_ROOT = BASE_DIR / "results"
+if not DATA_ROOT.exists() and (BASE_DIR.parent / "results").exists():
+    DATA_ROOT = BASE_DIR.parent / "results"
+
+_DATA_CSV_CANDIDATES = (
+    DATA_ROOT / "final" / "result1_Final_All.csv",
+    DATA_ROOT / "result1.csv",
+)
+DATA_CSV = next(
+    (path for path in _DATA_CSV_CANDIDATES if path.exists()),
+    _DATA_CSV_CANDIDATES[0],
+)
 
 RESULT3_CANDIDATES = (
-    BASE_DIR / "results" / "final" / "result3.csv",
-    BASE_DIR / "results" / "stage3e1" / "result3.csv",
+    DATA_ROOT / "final" / "result3.csv",
+    DATA_ROOT / "stage3e1" / "result3.csv",
+    DATA_ROOT / "result3.csv",
 )
 RESULT4_CANDIDATES = (
-    BASE_DIR / "results" / "final" / "result4.csv",
-    BASE_DIR / "results" / "stage3e1" / "result4.csv",
+    DATA_ROOT / "final" / "result4.csv",
+    DATA_ROOT / "stage3e1" / "result4.csv",
+    DATA_ROOT / "result4.csv",
 )
 
 RESULT3_REQUIRED = ("主题簇编号", "主题簇名称")
 RESULT4_REQUIRED = ("主题簇编号", "主题簇名称", "机会价值分")
 
 AUDIT_CSV = BASE_DIR / "experiments" / "stage3e3" / "cluster5_guo_initial_audit.csv"
-HUMAN_METRICS_PATH = BASE_DIR / "results" / "final" / "human_metrics.json"
+_PACKAGE_AUDIT = (
+    BASE_DIR.parent / "experiments" / "stage3e3" / "cluster5_guo_initial_audit.csv"
+)
+if not AUDIT_CSV.exists() and _PACKAGE_AUDIT.exists():
+    AUDIT_CSV = _PACKAGE_AUDIT
+HUMAN_METRICS_PATH = DATA_ROOT / "final" / "human_metrics.json"
 PAUSED_CLUSTER_FALLBACK = ("T3-C004",)
 
 MOCK_NOTE = (

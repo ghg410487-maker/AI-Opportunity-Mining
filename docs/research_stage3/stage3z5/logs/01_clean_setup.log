@@ -1,0 +1,29 @@
+# Stage3Z-5 clean environment setup log
+
+date: 2026-11-14
+source repo: E:/AIjiaoyu (local Git clone)
+integration branch: integration/stage3e4
+integration commit: cd53379 (before final docs commit)
+remote fetch: FAILED - github.com:443 via local proxy 127.0.0.1 not reachable
+clone command: git clone --no-local -b integration/stage3e4 E:/AIjiaoyu E:/AIjiaoyu_z5_clean
+
+python: 3.12.0
+platform: Windows-11-10.0.26200-SP0
+venv command: python -m venv .venv
+install command: .venv/Scripts/python.exe -m pip install -r requirements.txt
+install result: SUCCESS
+installed key versions:
+  streamlit 1.67.0
+  pandas 3.1.1
+  beautifulsoup4 4.15.0
+  requests 2.34.2
+  pytest 9.2.0
+
+data prepared into clean clone (controlled data copied from main workspace):
+  results/final/result1_Final_All.csv
+  results/final/result2_resolved_subset.csv
+  results/final/result2_export_blockers.csv
+  results/final/result3.csv
+  results/final/result4.csv
+  results/final/unified_records.jsonl
+  experiments/stage3e3/cluster5_guo_initial_audit.csv

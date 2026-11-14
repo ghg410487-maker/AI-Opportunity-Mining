@@ -1,0 +1,306 @@
+{
+  "schema_version": "submission_manifest_v1",
+  "version": "v1-experimental",
+  "algorithm_version": "v1-rule-baseline",
+  "algorithm_config_version": "competition-mvp-v1",
+  "generated_at": "2026-11-14T16:48:18",
+  "overall_status": "NOT_READY",
+  "submission_ready": false,
+  "blockers": [
+    "result2.csv 数据行数为 0（占位文件）",
+    "严格校验未通过"
+  ],
+  "result1_sha256": "44c75335b3795c746ffc603b339bf6aa4d2e6945e38ebd0a8bcb9d39c9ff0a52",
+  "results": {
+    "result1.csv": 1984,
+    "result3.csv": 5,
+    "result4.csv": 5,
+    "result2.csv": 0,
+    "result2_mode": "placeholder_header_only"
+  },
+  "validation": {
+    "passed": false,
+    "output_tail": "✅ result4 与 result3 行数一致\n✅ result4 机会价值分范围 6.28-94.38\n✅ result4 优先级唯一\n\n=== 校验摘要 ===\n• result2：待补充已决记录\nNOT_READY\n严格模式阻断原因：2 项硬错误；result2 未与 result1 100% 对账"
+  },
+  "files": [
+    {
+      "path": "docs/AI_usage_log.md",
+      "size": 2923,
+      "sha256": "461abf1f2cdb9155e0368cf4593b521e0749ff28f8decffa0588eec0688d5b11",
+      "purpose": "公开文档",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "docs/demo_guide.md",
+      "size": 3385,
+      "sha256": "a3cdd744144d171cf9fe4de2264a38d5c12347a046afd333f27b94042a6aa6b2",
+      "purpose": "公开文档",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "docs/environment_and_deployment.md",
+      "size": 930,
+      "sha256": "f452d8427d3090c252af6834cfb0b7358b163b2c0426838cef9b6e31b264d924",
+      "purpose": "公开文档",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "docs/official_result_switch_contract.md",
+      "size": 675,
+      "sha256": "83582f1f8af32bf58c6b812dc7eca926e1dce90a467a95b49433433479a56d1c",
+      "purpose": "公开文档",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "README.md",
+      "size": 2196,
+      "sha256": "08bc4ad74ad3411b8d2a03d320f2c3722656d0548dd06e5c3fcc84d978ca7f21",
+      "purpose": "包说明",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "results/result1.csv",
+      "size": 1084788,
+      "sha256": "44c75335b3795c746ffc603b339bf6aa4d2e6945e38ebd0a8bcb9d39c9ff0a52",
+      "purpose": "官方结果 CSV",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "results/result2.csv",
+      "size": 94,
+      "sha256": "93a4de6be0d7476bbfac8a31636b22eadf29004832acc067e52e0cf6fc764947",
+      "purpose": "官方结果 CSV",
+      "version": "v1-experimental",
+      "formal": false,
+      "status": "NOT_READY"
+    },
+    {
+      "path": "results/result3.csv",
+      "size": 1043,
+      "sha256": "8142e768deb7bfd4d5d592a8b8a6f276d25a42fa476707ca3ad759e9582719f9",
+      "purpose": "官方结果 CSV",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "results/result4.csv",
+      "size": 443,
+      "sha256": "c12d86443e3267ee3b01fbc7aef577c65a0248f1a62930dd42cfea04aef3da45",
+      "purpose": "官方结果 CSV",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "screenshots/overview.png",
+      "size": 166780,
+      "sha256": "2895b8e949716921154e67563a9ccc0b1b3214e45c79b3979ef616154889ca62",
+      "purpose": "系统截图",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "screenshots/plan.png",
+      "size": 123302,
+      "sha256": "cfa303802ab9285a582710533c356c2d7728edb9639287edeebee296e4fc4771",
+      "purpose": "系统截图",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "screenshots/ranking.png",
+      "size": 168126,
+      "sha256": "6a0f4442eb4470b1fc26c6b43857d7fcd9759e68b3b8d3970e71d2cf5b2b6dde",
+      "purpose": "系统截图",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "screenshots/topics.png",
+      "size": 254298,
+      "sha256": "bbc9d32ed6b6400bf8692f469f00bc87b2e2980fb484d1d84aa339f12ef79eb7",
+      "purpose": "系统截图",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/app.py",
+      "size": 23462,
+      "sha256": "dee59a4bffd8a71dfd940cf7d15c626c27934ae5b1c790c42ef2b7bfa8f9fc99",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/config/official_headers.py",
+      "size": 1073,
+      "sha256": "0733ed3e0a426968bd8c8649132f8189d8f76c975af8f18f4bb4b5ae24726c9a",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/edumine/__init__.py",
+      "size": 95,
+      "sha256": "7055e6acb337466030c63c1c9b41e5749b0051b83b3c58db69bfa714ed444d42",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/edumine/__main__.py",
+      "size": 51,
+      "sha256": "482b8693e2fe6dbd732e3d7961e03827d3efa187bad11d29da188be580ebbeea",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/edumine/baselines.py",
+      "size": 5843,
+      "sha256": "b04703796bfcca047b633de7205d209e55057c4c5b909d4fbffac8d624f5f3f3",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/edumine/cli.py",
+      "size": 3064,
+      "sha256": "5ef66578e579834a406092fbfb27060ac9dfe05896b1e3519aa7c0befb0eb74f",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/edumine/competition.py",
+      "size": 17027,
+      "sha256": "6b1510381d816a53eb3820469b2b8a63ab5bfd5d81309cc2cd723203a8beedd5",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/edumine/core.py",
+      "size": 23290,
+      "sha256": "e61cb01c433a213e130af70f47fe2b635d3522331c19e007858900797d2e5397",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/edumine/normalization.py",
+      "size": 14829,
+      "sha256": "e50aa1d0b9eb9a0bbdb48fdac9d8e5da542ecb7e336fa55953a61c917e0b9cad",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/edumine/stage3e2.py",
+      "size": 5663,
+      "sha256": "d6b5bc3f0272b70d3b2fa03f3fa40809ae3d59337026eec767ee56dcb282f340",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/edumine/stage3e3.py",
+      "size": 2856,
+      "sha256": "fb109692e525b93827d7f2b389999d7713968b4ca6952bf76d14f2ec0c3080f1",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/requirements.txt",
+      "size": 79,
+      "sha256": "fa7517dcc1612d09b7f16e9fdcc8c1b808d24846986ca667f111b03667c3603e",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/run_system.bat",
+      "size": 491,
+      "sha256": "819d500ce1bd2ef64e81035555407ca10d29542519076f15de4c6e01744ffeea",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/run_system.sh",
+      "size": 492,
+      "sha256": "cc47aefbfe86ec3164f7e5ee1cdee4e5ddf42af6a34dec0e1b4ed930c20549af",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/scripts/switch_official_results.py",
+      "size": 13410,
+      "sha256": "2bbd75492737772a7452407bf558a17d27104c334c86c30f249538ff16edf44d",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/scripts/validate_csv.py",
+      "size": 15405,
+      "sha256": "cca31cd0b00e3af09706aa322818e71db389810b40178ad782cf866fef5de765",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "source/src/data_loader.py",
+      "size": 9024,
+      "sha256": "e86d1d60327c7a273390afcab4ef7bc3284138487bf68ff69d41e426ba103576",
+      "purpose": "运行源码",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    },
+    {
+      "path": "submission_checklist.md",
+      "size": 3944,
+      "sha256": "36245e31b1bee73bae0dddcb68fec8754cc378229b20dd4705bf290f41249f80",
+      "purpose": "包说明",
+      "version": "v1-experimental",
+      "formal": true,
+      "status": "READY"
+    }
+  ]
+}

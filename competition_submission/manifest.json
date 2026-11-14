@@ -3,7 +3,7 @@
   "version": "v1-experimental",
   "algorithm_version": "v1-rule-baseline",
   "algorithm_config_version": "competition-mvp-v1",
-  "generated_at": "2026-11-14T16:42:43",
+  "generated_at": "2026-11-14T16:50:50",
   "overall_status": "NOT_READY",
   "submission_ready": false,
   "blockers": [
@@ -142,8 +142,8 @@
     },
     {
       "path": "source/app.py",
-      "size": 22947,
-      "sha256": "0b3cab053f21a1a7cc64701666469b4494043c315f08ceece7315d2d4f1e6f89",
+      "size": 23462,
+      "sha256": "dee59a4bffd8a71dfd940cf7d15c626c27934ae5b1c790c42ef2b7bfa8f9fc99",
       "purpose": "运行源码",
       "version": "v1-experimental",
       "formal": true,
@@ -296,7 +296,7 @@
     {
       "path": "submission_checklist.md",
       "size": 3944,
-      "sha256": "3e5eebb45305f7734f2cd6ebe7c4390e6f3e2ab575ae84b60eb8fd0dd871832a",
+      "sha256": "6806b39d9594edf781e5679aaeb910d78cc335279c46d596a90701f54a0a01f8",
       "purpose": "包说明",
       "version": "v1-experimental",
       "formal": true,

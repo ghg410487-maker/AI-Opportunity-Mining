@@ -1,0 +1,13 @@
+[机会主题发现] C004提示=True 人工分层=True 下载=False 绝对路径=False
+[机会价值排行] C004提示=True 人工分层=False 下载=False 绝对路径=False
+[机会策划案] C004提示=True 人工分层=False 下载=True 绝对路径=False
+[missing result3.csv] rc=0 exceptions 0
+missing_notice False 2026-11-14 16:46:41.348 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+[missing result4.csv] rc=0 exceptions 0
+missing_notice False 2026-11-14 16:46:45.434 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+[missing result3.csv -> 机会主题发现] rc=0 exceptions 0
+missing_notice True
+texts ['待算法端输出 result3.csv，以下先以 Mock 数据占位。', '【Mock 数据测试】当前为演示数据，非算法端真实结果，禁止用于正式导出、验收或对外汇报。']
+[missing result4.csv -> 机会价值排行] rc=0 exceptions 0
+missing_notice True
+texts ['待算法端输出 result4.csv，以下先以 Mock 数据占位。', '【Mock 数据测试】当前为演示数据，非算法端真实结果，禁止用于正式导出、验收或对外汇报。']

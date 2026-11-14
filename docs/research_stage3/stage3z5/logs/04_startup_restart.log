@@ -1,0 +1,17 @@
+[first-start] HTTP=200 elapsed=5.8s pid=69624
+[first-start] log:
+[AIjiaoyu] 启动系统：http://localhost:8501
+2026-11-14 16:45:42.597 Uvicorn server started on :::8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+[restart] HTTP=200 elapsed=6.7s pid=74376
+[restart] log:
+[AIjiaoyu] 启动系统：http://localhost:8501
+2026-11-14 16:45:50.642 Uvicorn server started on :::8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+RESULT first=200 restart=200

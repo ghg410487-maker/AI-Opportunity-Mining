@@ -1,0 +1,19 @@
+=== 官方四份 CSV 核对 ===
+目录：E:\AIjiaoyu_z5_clean\results\final
+模式：预览模式
+✅ result1 行数 1984，记录编号唯一
+✅ result2 已决子集 1389 条，记录编号唯一，状态仅 0/1
+✅ result2 REVIEW 阻断表 595 条，记录编号唯一
+✅ result2 与 result1 对账一致：1389 已决 + 595 REVIEW = 1984
+✅ result3 共 5 个主题簇，主题簇编号唯一
+✅ result3 簇内记录 42 条，无重复
+✅ result3 与 result2 机会记录对账一致：42 条
+✅ result4 共 5 条评分记录，主题簇编号唯一
+✅ result4 与 result3 主题簇集合一致
+✅ result4 与 result3 行数一致
+✅ result4 机会价值分范围 6.28-94.38
+✅ result4 优先级唯一
+
+=== 校验摘要 ===
+• result2：部分通过（已决 1389 条，待 REVIEW 审批 595 条），REVIEW 保持阻断，禁止正式全量导出
+校验结果：部分通过（result2 待 REVIEW 审批，其余 CSV 核对通过）

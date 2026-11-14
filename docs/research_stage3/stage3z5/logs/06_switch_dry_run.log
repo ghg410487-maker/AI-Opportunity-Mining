@@ -1,0 +1,19 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.0, pytest-9.2.0, pluggy-1.7.0 -- E:\AIjiaoyu\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: E:\AIjiaoyu
+plugins: anyio-4.16.0
+collecting ... collected 10 items
+
+tests/test_switch_official_results.py::test_publish_success PASSED       [ 10%]
+tests/test_switch_official_results.py::test_dry_run_does_not_modify PASSED [ 20%]
+tests/test_switch_official_results.py::test_blocked_without_approval PASSED [ 30%]
+tests/test_switch_official_results.py::test_blocked_missing_result2 PASSED [ 40%]
+tests/test_switch_official_results.py::test_blocked_review_in_result2 PASSED [ 50%]
+tests/test_switch_official_results.py::test_blocked_result3_non_opportunity PASSED [ 60%]
+tests/test_switch_official_results.py::test_blocked_result4_cluster_mismatch PASSED [ 70%]
+tests/test_switch_official_results.py::test_blocked_hash_mismatch PASSED [ 80%]
+tests/test_switch_official_results.py::test_blocked_service_running PASSED [ 90%]
+tests/test_switch_official_results.py::test_publish_failure_rolls_back PASSED [100%]
+
+============================= 10 passed in 12.66s =============================

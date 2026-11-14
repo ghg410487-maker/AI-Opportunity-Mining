@@ -3,7 +3,7 @@
 - 包版本：`v1-experimental`
 - 总体状态：**NOT_READY**
 - `submission_ready`：`False`
-- 生成时间：2026-11-14T16:42:43
+- 生成时间：2026-11-14T16:50:50
 
 ## 1. 阻断项
 
@@ -41,7 +41,7 @@
 | `screenshots/plan.png` | 123302 | `cfa303802ab9285a…` | READY |
 | `screenshots/ranking.png` | 168126 | `6a0f4442eb4470b1…` | READY |
 | `screenshots/topics.png` | 254298 | `bbc9d32ed6b6400b…` | READY |
-| `source/app.py` | 22947 | `0b3cab053f21a1a7…` | READY |
+| `source/app.py` | 23462 | `dee59a4bffd8a71d…` | READY |
 | `source/config/official_headers.py` | 1073 | `0733ed3e0a426968…` | READY |
 | `source/edumine/__init__.py` | 95 | `7055e6acb3374660…` | READY |
 | `source/edumine/__main__.py` | 51 | `482b8693e2fe6dbd…` | READY |
@@ -58,7 +58,7 @@
 | `source/scripts/switch_official_results.py` | 13410 | `2bbd75492737772a…` | READY |
 | `source/scripts/validate_csv.py` | 15405 | `cca31cd0b00e3af0…` | READY |
 | `source/src/data_loader.py` | 9024 | `e86d1d60327c7a27…` | READY |
-| `submission_checklist.md` | 3944 | `3e5eebb45305f773…` | READY |
+| `submission_checklist.md` | 3944 | `6806b39d9594edf7…` | READY |
 
 ## 4. 正式发布闸门
 
